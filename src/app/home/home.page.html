@@ -3,14 +3,15 @@
     <ion-title>
       Ionic
     </ion-title>
-    <!-- <ion-buttons slot="end">
-      <ion-back-button defaultHref="/"></ion-back-button>
-    </ion-buttons> -->
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="ion-padding-top">
+  <ion-button size="small" class="ion-padding-horizontal">Default</ion-button>
+  <ion-button size="small" class="ion-padding-horizontal">Default</ion-button>
+</ion-content>
 
+<ion-content>
   <ion-item class="ion-padding-horizontal ion-padding-top" style="padding-bottom: 8px;">
     <ion-label position="fixed">Usuario</ion-label>
     <ion-input type="text" placeholder="Nombre" [(ngModel)]="txUsuario"></ion-input>
