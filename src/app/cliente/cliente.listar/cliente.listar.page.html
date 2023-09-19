@@ -1,0 +1,23 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+      
+      <ion-buttons slot="start">
+        <ion-menu-button menu="menuId"></ion-menu-button>
+      </ion-buttons>
+      
+      <ion-buttons slot="end">
+        <ion-back-button></ion-back-button>
+      </ion-buttons>
+
+      <ion-title>Listar</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list class="ion-padding-horizontal">
+    <ion-item *ngFor = "let item of registros">
+      <ion-label>¿Registros?</ion-label>
+      
+    </ion-item>
+  </ion-list>
+</ion-content>

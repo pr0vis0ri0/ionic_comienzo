@@ -12,37 +12,37 @@
 
 <ion-content>
     <ion-list>
-        <ion-item text-center>
-            <ion-img width="192" height="192" src="assets/shapes.svg">
+        <ion-item class="ion-padding-bottom">
+            <ion-img style="height: 100%; width: 100%;" src="assets/shapes.svg">
             </ion-img>
         </ion-item>
-        <ion-item>
-            <ion-icon name="person" item-left></ion-icon>
+        <ion-item class="ion-padding-horizontal" style="padding-bottom: 8px;">
+            <ion-icon name="person" item-left style="padding-right: 8px;"></ion-icon>
             <ion-label position="fixed">Email:</ion-label>
-            <!--Creamos la variable txEmail en TS-->
             <ion-input [(ngModel)]="txEmail" type="text" placeholder="Email"></ion-input>
         </ion-item>
-        <ion-item>
-            <ion-icon name="key" item-left></ion-icon>
-            <ion-label stacked>Password:</ion-label>
+        <ion-item class="ion-padding-horizontal" style="padding-bottom: 8px;"   >
+            <ion-icon name="key" item-left style="padding-right: 8px;"></ion-icon>
+            <ion-label position="fixed">Password:</ion-label>
             <!--Creamos la variable txPassword en TS-->
             <ion-input [(ngModel)]="txPassword" type="password" placeholder="Password">
             </ion-input>
         </ion-item>
     </ion-list>
-    <div padding>
-        <!-- Creamos el método loginUser() en el TS -->
-        <button ion-button block (click)="loginUser()"> Actualizar</button>
-    </div>
-
-    <div text-center>
-        <!-- Creamos el método goToSignup() en el TS -->
-        <a ion-button block clear (click)="goToSignup()">
+    <div class="ion-padding">
+        <ion-button (click)="loginUser()" size="small">
+            <ion-icon slot="start" name="add"></ion-icon>
+            Actualizar
+        </ion-button>
+        <br>
+        <ion-button (click)="goToSignup()" size="small">
+            <ion-icon slot="start" name="add"></ion-icon>
             Nueva cuenta
-        </a>
-        <!-- Creamos el método goToResetPassword() en el TS -->
-        <a ion-button block clear (click)="goToResetPassword()">
-            Olvide password
-        </a>
+        </ion-button>
+        <br>
+        <ion-button (click)="goToResetPassword()" size="small">
+            <ion-icon slot="start" name="add"></ion-icon>
+            ¿Olvidaste tu contraseña?
+        </ion-button>
     </div>
 </ion-content>

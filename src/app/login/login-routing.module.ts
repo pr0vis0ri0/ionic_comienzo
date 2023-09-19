@@ -5,9 +5,7 @@ import { LoginPage } from "./login.page";
 // si la otra pertenece al mismo grupo sólo lo añades
 
 const routes: Routes = [
-    { path: 'conectar', component: LoginPage},
-    { path: 'prueba2', component: LoginPage},
-    { path: 'prueba3', component: LoginPage}
+    { path: '', component: LoginPage}
 ]
 
 @NgModule({
