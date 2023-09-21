@@ -1,23 +1,33 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-      
-      <ion-buttons slot="start">
-        <ion-menu-button menu="menuId"></ion-menu-button>
-      </ion-buttons>
-      
-      <ion-buttons slot="end">
-        <ion-back-button></ion-back-button>
-      </ion-buttons>
-
-      <ion-title>Listar</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      CLI / Listar
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ion-list class="ion-padding-horizontal">
     <ion-item *ngFor = "let item of registros">
-      <ion-label>¿Registros?</ion-label>
+      <ion-icon name="star" slot="start" size="small"></ion-icon>
+      <ion-label>{{ item.nombres }}</ion-label>
+      <ion-label>{{ item.apellidos }}</ion-label>
+      <ion-icon name="information-circle" slot="start" size="small"></ion-icon>
       
+      <ion-item *ngIf="hasProp(item, 'id')">
+        <ion-button [routerLink]="['/cliente/cliente.leer',item.id]">Con ID</ion-button><br/>
+      </ion-item>
+
+      <ion-item *ngIf="!hasProp(item, 'id')">
+        <ion-button>Sin ID</ion-button><br/>
+        <!-- [routerLink]="['/cliente/cliente.leer']" -->
+      </ion-item>
     </ion-item>
   </ion-list>
 </ion-content>
