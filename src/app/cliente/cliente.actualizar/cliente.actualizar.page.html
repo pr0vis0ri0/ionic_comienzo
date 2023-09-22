@@ -7,27 +7,31 @@
       <ion-back-button></ion-back-button>
     </ion-buttons>
     <ion-title>
-      CLI / Agregar
+      CLI / Actualizar
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <form>
-    <ion-item style="padding-bottom: 8px;" lines="full" class="ion-padding-horizontal ion-padding-top">
-      <ion-label position="fixed">Nombre</ion-label>
+    <ion-item style="padding-bottom:8px;" lines="full" class="ion-padding-horizontal ion-padding-top">
+      <ion-label position="floating">ID</ion-label>
+      <ion-input type="text" placeholder="¿?" name="txId" [(ngModel)]="id" required></ion-input>
+    </ion-item>
+    <ion-item style="padding-bottom: 8px;" lines="full" class="ion-padding-horizontal">
+      <ion-label position="floating">Nombre</ion-label>
       <ion-input type="text" placeholder="¿?" name="txNombres" [(ngModel)]="registro.nombres" required></ion-input>
     </ion-item>
     <ion-item style="padding-bottom: 8px;" lines="full" class="ion-padding-horizontal">
-      <ion-label position="fixed">Apellido</ion-label>
+      <ion-label position="floating">Apellido</ion-label>
       <ion-input type="text" placeholder="¿?" name="txApellidos" [(ngModel)]="registro.apellidos" required></ion-input>
     </ion-item>
     <ion-item style="padding-bottom: 8px;" lines="full" class="ion-padding-horizontal">
-      <ion-label position="fixed">Correo electrónico</ion-label>
+      <ion-label position="floating">Correo electrónico</ion-label>
       <ion-input type="text" placeholder="¿?" name="txCorreo" [(ngModel)]="registro.correo"></ion-input>
     </ion-item>
     <ion-item style="padding-bottom: 8px;" lines="full" class="ion-padding-horizontal">
-      <ion-label position="fixed">Contraseña</ion-label>
+      <ion-label position="floating">Contraseña</ion-label>
       <ion-input type="text" placeholder="¿?" name="txClave" [(ngModel)]="registro.clave"></ion-input>
     </ion-item>
     <ion-row class="ion-padding-horizontal ion-padding-top" style="display:flex; justify-content:center;">

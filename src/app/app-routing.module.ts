@@ -26,6 +26,10 @@ const routes: Routes = [
   {
     path: 'cliente/agregar',
     loadChildren: () => import('./cliente/cliente.agregar/cliente.agregar.module').then( m => m.ClienteAgregarPageModule)
+  },
+  {
+    path: 'cliente/actualizar',
+    loadChildren: () => import('./cliente/cliente.actualizar/cliente.actualizar.module').then( m => m.ClienteActualizarPageModule)
   }
 
 ];

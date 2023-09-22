@@ -8,11 +8,12 @@ interface Registro {
 }
 
 @Component({
-  selector: 'app-cliente.agregar',
-  templateUrl: './cliente.agregar.page.html',
-  styleUrls: ['./cliente.agregar.page.scss'],
+  selector: 'app-cliente.actualizar',
+  templateUrl: './cliente.actualizar.page.html',
+  styleUrls: ['./cliente.actualizar.page.scss'],
 })
-export class ClienteAgregarPage implements OnInit {
+export class ClienteActualizarPage implements OnInit {
+  id : string = "5"
   registro : Registro = {
     nombres : '',
     apellidos : '',
@@ -25,5 +26,6 @@ export class ClienteAgregarPage implements OnInit {
   ngOnInit() {
   }
 
-  grabar () {}
+  grabar() {}
+
 }
