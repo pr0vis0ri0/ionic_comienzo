@@ -22,7 +22,12 @@ const routes: Routes = [
   {
     path: 'cliente/listar',
     loadChildren: () => import('./cliente/cliente.listar/cliente.listar.module').then( m => m.ClienteListarPageModule)
+  },
+  {
+    path: 'cliente/agregar',
+    loadChildren: () => import('./cliente/cliente.agregar/cliente.agregar.module').then( m => m.ClienteAgregarPageModule)
   }
+
 ];
 
 @NgModule({

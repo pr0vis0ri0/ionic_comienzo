@@ -11,9 +11,18 @@
   </ion-header>
   <ion-content>
     <ion-list>
-      <ion-item (click)="navegarA('/login')">Ingreso</ion-item>
-      <ion-item (click)="navegarA('/registro')">Registro</ion-item>
-      <ion-item (click)="navegarA('/cliente/listar')">CLI / Listar</ion-item>
+      <ion-item (click)="navegarA('/login')">
+        <ion-label>Ingreso</ion-label>
+      </ion-item>
+      <ion-item (click)="navegarA('/registro')">
+        <ion-label>Registro</ion-label>
+      </ion-item>
+      <ion-item (click)="navegarA('/cliente/listar')">
+        <ion-label>CLI / Listar</ion-label>
+      </ion-item>
+      <ion-item (click)="navegarA('/cliente/agregar')">
+        <ion-label>CLI / Agregar</ion-label>
+      </ion-item>
     </ion-list>
   </ion-content>
 </ion-menu>
