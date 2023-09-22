@@ -1,0 +1,29 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      CLI / Eliminar
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form>
+    <ion-item class="ion-padding-horizontal ion-padding-top">
+      <ion-label position="fixed">ID</ion-label>
+      <ion-input type="text" name="txId" [(ngModel)]="id" required></ion-input>
+    </ion-item>
+    <ion-row style="display: flex; justify-content: center;">
+      <ion-col size="4">
+        <ion-button (click)="grabar()" size="small" expand="block">
+          Eliminar cuenta
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </form>
+</ion-content>

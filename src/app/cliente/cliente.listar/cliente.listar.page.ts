@@ -1,9 +1,14 @@
 import { Component, OnInit } from '@angular/core';
+import { ClienteService } from '../cliente.service';
+import { IRegistro } from '../interface/registro';
 
+// Puede que esto lo comente ya que ahora tengo la interface importada desde el registro.ts
 interface Registro {
-  id? : string;
-  nombres: string;
-  apellidos: string;
+  id? : string,
+  nombres: string,
+  apellidos: string,
+  correo? : string,
+  clave? : string
 }
 
 @Component({
@@ -24,7 +29,9 @@ export class ClienteListarPage implements OnInit {
     {id:"12232",nombres:"Mario Jose",apellidos:"Picapiedras"},
     {nombres:"Sebas",apellidos:"Rebolledo"} ]
 
-  constructor() { }
+  constructor(private clivServ: ClienteService, public clivServPublic: ClienteService) { }
+
+  registro = this.clivServ.getRegistrosReferencia
 
   ngOnInit() {
   }

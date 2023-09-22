@@ -30,6 +30,14 @@ const routes: Routes = [
   {
     path: 'cliente/actualizar',
     loadChildren: () => import('./cliente/cliente.actualizar/cliente.actualizar.module').then( m => m.ClienteActualizarPageModule)
+  },
+  {
+    path: 'cliente/eliminar',
+    loadChildren: () => import('./cliente/cliente.eliminar/cliente.eliminar.module').then( m => m.ClienteEliminarPageModule)
+  },
+  {
+    path: 'cliente/leer',
+    loadChildren: () => import('./cliente/cliente.leer/cliente.leer.module').then( m => m.ClienteLeerPageModule)
   }
 
 ];
