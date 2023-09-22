@@ -19,6 +19,8 @@ interface Registro {
 
 export class ClienteListarPage implements OnInit {
 
+  registro = this.clivServ.getRegistrosReferencia
+
   registros : Registro [] = 
   [ {id:"122",nombres:"Juan Gabriel",apellidos:"Picapiedras"},
     {id:"128",nombres:"Tito Gabril",apellidos:"Picapiedras"},
@@ -29,9 +31,45 @@ export class ClienteListarPage implements OnInit {
     {id:"12232",nombres:"Mario Jose",apellidos:"Picapiedras"},
     {nombres:"Sebas",apellidos:"Rebolledo"} ]
 
-  constructor(private clivServ: ClienteService, public clivServPublic: ClienteService) { }
+  constructor(private clivServ: ClienteService, public clivServPublic: ClienteService) {
+    this.registro = this.clivServ.getRegistrosReferencia
+    this.registro.push({
+      id : "10",
+      nombres : "M10",
+      apellidos : "P10",
+      correo : "x@uc.cl",
+      clave : "1134"
+    })
+    console.log("Registro de referencia: " , this.registro)
 
-  registro = this.clivServ.getRegistrosReferencia
+    this.registro = this.clivServ.getRegistrosCopia
+    this.registro.push({
+      id : "20",
+      nombres : "M20",
+      apellidos : "P20",
+      correo : "x@uc.cl",
+      clave : "1134"
+    })
+    console.log("Registro copiado: ", this.registro)
+
+    this.registro = this.clivServ.getRegistroMetodo()
+    this.registro.push({
+      id : "30",
+      nombres : "M30",
+      apellidos : "P30",
+      correo : "x@uc.cl",
+      clave : "1134"
+    })
+    console.log("Registro referenciado a través de método: ", this.registro)
+  }
+
+  get getRegistros() : IRegistro[] {
+    return this.clivServ.getRegistros
+  }
+
+  getRegistrosMetodo() : IRegistro[] {
+    return this.clivServ.getRegistrosCopia
+  }
 
   ngOnInit() {
   }
