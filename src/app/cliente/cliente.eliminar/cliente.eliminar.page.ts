@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ClienteService } from '../cliente.service';
+import { IRegistro } from '../interface/registro';
 
 @Component({
   selector: 'app-cliente.eliminar',
@@ -6,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./cliente.eliminar.page.scss'],
 })
 export class ClienteEliminarPage implements OnInit {
-  id : string = "6"
-  constructor() { }
-  ngOnInit() {
+
+  id : string = ''
+
+  constructor(private cliServ : ClienteService) { }
+
+  ngOnInit() { }
+
+  eliminarRegistro() {
+    this.cliServ.eliminarServicio(this.id)
   }
-  grabar() {}
 }

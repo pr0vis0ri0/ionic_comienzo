@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { IRegistro } from '../interface/registro';
+import { ClienteService } from '../cliente.service';
 
 interface Registro {
   nombres: string;
@@ -13,19 +15,21 @@ interface Registro {
   styleUrls: ['./cliente.actualizar.page.scss'],
 })
 export class ClienteActualizarPage implements OnInit {
-  id : string = "5"
-  registro : Registro = {
+  registro : IRegistro = {
+    id : '',
     nombres : '',
     apellidos : '',
     correo : '',
     clave : ''
   }
 
-  constructor() { }
+  constructor(private cliServ : ClienteService) { }
 
   ngOnInit() {
   }
 
-  grabar() {}
+  actualizarRegistro() {
+    this.cliServ.actualizarServicio(this.registro)
+  }
 
 }

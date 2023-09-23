@@ -16,12 +16,12 @@
   <form>
     <ion-item class="ion-padding-horizontal ion-padding-top">
       <ion-label position="fixed">ID</ion-label>
-      <ion-input type="text" name="txId" [(ngModel)]="id" required></ion-input>
+      <ion-input type="text" placeholder="¿?" name="txId" [(ngModel)]="id" required></ion-input>
     </ion-item>
     <ion-row style="display: flex; justify-content: center;">
       <ion-col size="4">
-        <ion-button (click)="grabar()" size="small" expand="block">
-          Eliminar cuenta
+        <ion-button (click)="eliminarRegistro()" size="small" expand="block">
+          Eliminar Registro
         </ion-button>
       </ion-col>
     </ion-row>

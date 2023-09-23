@@ -17,7 +17,7 @@ export class ClienteService {
     ]
 
     constructor () {
-        console.log('Se inició el serivicio.')
+        console.log('Se inició el servicio.')
     }
 
     // Método que accede a la dirección de donde se encuentran los datos.
@@ -32,9 +32,9 @@ export class ClienteService {
 
     // Otro método que copia la información de los datos por medio de la referencia al array registros
     get getRegistrosCopia(): IRegistro[] {
-        // 3 punto retorna una copia
         return [...this.registros]
     }
+
     // Accesador que retorna la dirección del arreglo (¿? No lo entiendo, la única diferencia con el primer método es que este se accede como si fuese una propiedad de un objeto.)
     get getRegistrosReferencia(): IRegistro[] {
         return this.registros
@@ -43,5 +43,41 @@ export class ClienteService {
     agregarServicio(reg : IRegistro){
         this.registros.push(reg)
         console.log("Registro agregar : ", this.registros)
+    }
+
+    actualizarServicio (reg: IRegistro) {
+        let buscar = this.registros.find((e) => e.id === reg.id) 
+
+        if (buscar) {
+            buscar.nombres = reg.nombres
+            buscar.apellidos = reg.apellidos
+            buscar.correo = reg.correo
+            buscar.clave = reg.clave
+        }
+    }
+
+    eliminarServicio (id : string) {
+        for (let i = this.registros.length - 1 ; i >= 0 ; i --) {
+            if (this.registros[i].id === id) {
+                this.registros.splice(i, 1)
+            }
+        }
+    }
+
+    leerServicio (id : string) : IRegistro {
+
+        for (let i = 0 ; i < this.registros.length ; i ++) {
+            if (this.registros[i].id === id) {
+                return this.registros[i]
+            }
+        }
+
+        return {
+            id : '',
+            nombres : '',
+            apellidos : '',
+            correo : '',
+            clave : ''
+        }
     }
 }

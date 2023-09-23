@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+import { ClienteService } from '../cliente.service';
+import { IRegistro } from '../interface/registro';
 
-interface Registro {
-  nombres: string;
-  apellidos: string;
-  correo: string;
-  clave: string;
-}
+// interface Registro {
+//   nombres: string;
+//   apellidos: string;
+//   correo: string;
+//   clave: string;
+// }
 
 @Component({
   selector: 'app-cliente.agregar',
@@ -13,17 +15,20 @@ interface Registro {
   styleUrls: ['./cliente.agregar.page.scss'],
 })
 export class ClienteAgregarPage implements OnInit {
-  registro : Registro = {
+  registro : IRegistro = {
+    id : '',
     nombres : '',
     apellidos : '',
     correo : '',
     clave : ''
   }
 
-  constructor() { }
+  constructor(private cliServ: ClienteService) { }
 
   ngOnInit() {
   }
 
-  grabar () {}
+  grabar () {
+    this.cliServ.agregarServicio(this.registro)
+  }
 }

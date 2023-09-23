@@ -15,6 +15,10 @@
 <ion-content>
   <form>
     <ion-item style="padding-bottom: 8px;" lines="full" class="ion-padding-horizontal ion-padding-top">
+      <ion-label position="fixed">ID</ion-label>
+      <ion-input type="text" placeholder="¿?" name="txId" [(ngModel)]="registro.id" required></ion-input>
+    </ion-item>
+    <ion-item style="padding-bottom: 8px;" lines="full" class="ion-padding-horizontal">
       <ion-label position="fixed">Nombre</ion-label>
       <ion-input type="text" placeholder="¿?" name="txNombres" [(ngModel)]="registro.nombres" required></ion-input>
     </ion-item>

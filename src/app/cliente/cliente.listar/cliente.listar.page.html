@@ -30,25 +30,28 @@
     </ion-item>
   </ion-list>
 </ion-content> -->
-
 <ion-content>
-  <ion-item>
-    <ion-label>
-      <font color="red">Utilizando un Accesador</font>
+  <ion-item class="ion-padding-horizontal">
+    <ion-label style="display: flex; justify-content: center;">
+      <font color="blue">Método Accesador</font>
     </ion-label>
   </ion-item>
-  <ion-list padding>
+  <ion-list class="ion-padding-horizontal">
     <ion-item *ngFor="let item of getRegistros">
-      <ion-icon name="star" slot="start"></ion-icon>
+      <ion-icon name="star" slot="start" size="small"></ion-icon>
       <ion-label>{{item.nombres}}</ion-label>
       <ion-label>{{item.apellidos}}</ion-label>
-      <ion-icon name="information-circle" slot="end"></ion-icon>
-      <ion-button [routerLink]="['/cliente/leer']">Sin ID</ion-button><br />
-      <ion-button [routerLink]="['/cliente/leer',item.id]">Con ID</ion-button><br />
+      <ion-icon name="information-circle" slot="start" size="small"></ion-icon>
+      <ion-item *ngIf="hasPropInterface(item, 'id')">
+        <ion-button [routerLink]="['/cliente/cliente.leer',item.id]">Con ID</ion-button>
+      </ion-item>
+      <ion-item *ngIf="!hasPropInterface(item, 'id')">
+        <ion-button>Sin ID</ion-button>
+      </ion-item>
     </ion-item>
   </ion-list>
-
-  <ion-item>
+</ion-content>
+  <!-- <ion-item>
     <ion-label>
       <font color="red">Utilizando un método</font>
     </ion-label>
@@ -79,4 +82,4 @@
       <ion-button [routerLink]="['/cliente/leer',item.id]">Con ID</ion-button><br />
     </ion-item>
   </ion-list>  
-</ion-content>
+</ion-content> -->

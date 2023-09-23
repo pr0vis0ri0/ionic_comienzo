@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+import { IRegistro } from '../interface/registro';
+import { ClienteService } from '../cliente.service';
 
-interface Registro {
-  nombres : string,
-  apellidos : string,
-  correo : string,
-  clave : string
-}
+// interface Registro {
+//   nombres : string,
+//   apellidos : string,
+//   correo : string,
+//   clave : string
+// }
 
 @Component({
   selector: 'app-cliente.leer',
@@ -14,6 +16,8 @@ interface Registro {
 })
 export class ClienteLeerPage implements OnInit {
 
+  constructor (private cliServ : ClienteService) { }
+
   msgError : string = '';
   buttonEliminarDisabled : boolean = false;
   buttonLeerDisabled : boolean = false;
@@ -21,16 +25,20 @@ export class ClienteLeerPage implements OnInit {
   buttonCrearDisabled : boolean = false;
   public id : string = '';
 
-  registro : Registro = {
+  registro : IRegistro = {
+    id : '',
     nombres : '',
     apellidos : '',
     correo : '',
     clave : ''
   }
-  
-  constructor() {}
+
   ngOnInit() {}
-  leer () {}
+
+  leer () {
+    this.registro = this.cliServ.leerServicio(this.id)
+  }
+  
   eliminar() {}
   grabar() {}
   actualizar() {}
