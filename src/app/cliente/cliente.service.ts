@@ -39,4 +39,9 @@ export class ClienteService {
     get getRegistrosReferencia(): IRegistro[] {
         return this.registros
     }
+
+    agregarServicio(reg : IRegistro){
+        this.registros.push(reg)
+        console.log("Registro agregar : ", this.registros)
+    }
 }
