@@ -47,7 +47,7 @@ export class ClienteService {
 
     actualizarServicio (reg: IRegistro) {
         let buscar = this.registros.find((e) => e.id === reg.id) 
-
+        
         if (buscar) {
             buscar.nombres = reg.nombres
             buscar.apellidos = reg.apellidos
