@@ -1,81 +1,89 @@
 {
-    "usuarios": [
-      {
-        "id": "U001",
-        "first_name": "Juan",
-        "last_name": "Pérez",
-        "email": "juan.perez@email.com",
-        "clave": "password123"
-      },
-      {
-        "id": "U002",
-        "first_name": "María",
-        "last_name": "Gómez",
-        "email": "maria.gomez@email.com",
-        "clave": "secret456"
-      },
-      {
-        "id": "U003",
-        "first_name": "Pedro",
-        "last_name": "Rodríguez",
-        "email": "pedro.rodriguez@email.com",
-        "clave": "mypassword789"
-      },
-      {
-        "id": "U004",
-        "first_name": "Ana",
-        "last_name": "Sánchez",
-        "email": "ana.sanchez@email.com",
-        "clave": "ana123456"
-      },
-      {
-        "id": "U005",
-        "first_name": "Carlos",
-        "last_name": "Martínez",
-        "email": "carlos.martinez@email.com",
-        "clave": "carlosPass987"
-      }
-    ],
-    "productos": [
-      {
-        "id": "P001",
-        "nombre": "Manzana",
-        "descripcion": "Fruta fresca de color rojo.",
-        "precio": 0.50,
-        "fecha": "2023-09-23",
-        "cantidad": 100
-      },
-      {
-        "id": "P002",
-        "nombre": "Libro de TypeScript",
-        "descripcion": "Introducción a TypeScript para principiantes.",
-        "precio": 15.00,
-        "fecha": "2023-08-15",
-        "cantidad": 50
-      },
-      {
-        "id": "P003",
-        "nombre": "Cafetera",
-        "descripcion": "Cafetera eléctrica de 1 litro.",
-        "precio": 30.00,
-        "fecha": "2023-07-10",
-        "cantidad": 20
-      },
-      {
-        "id": "P004",
-        "nombre": "Bicicleta",
-        "descripcion": "Bicicleta montañera de 21 velocidades.",
-        "precio": 250.00,
-        "fecha": "2023-05-05",
-        "cantidad": 15
-      },
-      {
-        "id": "P005",
-        "nombre": "Camiseta",
-        "descripcion": "Camiseta de algodón talla M.",
-        "precio": 10.00,
-        "fecha": "2023-06-12",
-        "cantidad": 75
-      }
-    ]
-  }
+  "usuarios": [
+    {
+      "id": "U001",
+      "first_name": "Juan",
+      "last_name": "Pérez",
+      "email": "juan.perez@email.com",
+      "clave": "password123"
+    },
+    {
+      "id": "U002",
+      "first_name": "María",
+      "last_name": "Gómez",
+      "email": "maria.gomez@email.com",
+      "clave": "secret456"
+    },
+    {
+      "id": "U003",
+      "first_name": "Pedro",
+      "last_name": "Rodríguez",
+      "email": "pedro.rodriguez@email.com",
+      "clave": "mypassword789"
+    },
+    {
+      "id": "U004",
+      "first_name": "Ana",
+      "last_name": "Sánchez",
+      "email": "ana.sanchez@email.com",
+      "clave": "ana123456"
+    },
+    {
+      "id": "U005",
+      "first_name": "Carlos",
+      "last_name": "Martínez",
+      "email": "carlos.martinez@email.com",
+      "clave": "carlosPass987"
+    }
+  ],
+  "productos": [
+    {
+      "id": 1,
+      "nombre": "Manzana",
+      "descripcion": "Fruta fresca de color rojo.",
+      "precio": 0.5,
+      "fecha": "2023-09-23",
+      "cantidad": 100
+    },
+    {
+      "id": 2,
+      "nombre": "Libro de TypeScript",
+      "descripcion": "Introducción a TypeScript para principiantes.",
+      "precio": 15,
+      "fecha": "2023-08-15",
+      "cantidad": 50
+    },
+    {
+      "id": 3,
+      "nombre": "Cafetera",
+      "descripcion": "Cafetera eléctrica de 1 litro.",
+      "precio": 30,
+      "fecha": "2023-07-10",
+      "cantidad": 20
+    },
+    {
+      "id": 4,
+      "nombre": "Bicicleta",
+      "descripcion": "Bicicleta montañera de 21 velocidades.",
+      "precio": 250,
+      "fecha": "2023-05-05",
+      "cantidad": 15
+    },
+    {
+      "id": 5,
+      "nombre": "Camiseta",
+      "descripcion": "Camiseta de algodón talla M.",
+      "precio": 10,
+      "fecha": "2023-06-12",
+      "cantidad": 75
+    },
+    {
+      "id": 6,
+      "nombre": "Prod. de Prueba",
+      "descripcion": "Una prueba.",
+      "precio": 50000,
+      "cantidad": 1,
+      "fecha": "2023-10-02T19:20:55.550Z"
+    }
+  ]
+}
