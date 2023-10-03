@@ -28,4 +28,13 @@ export class ProductoService {
         catchError(this.handleError<Producto>('¿?'))
       );
   }
+
+  getProducts(): Observable<Producto[]> {
+    console.log("RESTful API enviando GET ")
+    return this.http.get<Producto[]>(api_prod)
+      .pipe(
+        tap(r => console.log('fetched products.')),
+        catchError(this.handleError('getProducts', []))
+      )
+  }
 }

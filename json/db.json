@@ -84,6 +84,14 @@
       "precio": 50000,
       "cantidad": 1,
       "fecha": "2023-10-02T19:20:55.550Z"
+    },
+    {
+      "id": 7,
+      "nombre": "Prod. de Prueba",
+      "descripcion": "Una prueba.",
+      "precio": 50000,
+      "cantidad": 1,
+      "fecha": "2023-10-03T18:19:53.330Z"
     }
   ]
 }

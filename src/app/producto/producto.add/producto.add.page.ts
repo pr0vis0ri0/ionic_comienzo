@@ -16,7 +16,7 @@ export class ProductoAddPage implements OnInit {
   productForm! : FormGroup;
   // ¿Por qué con una clase ahora en vez de una interface?
   producto : Producto = {
-    id : 6,
+    id : 7,
     nombre : 'Prod. de Prueba',
     descripcion : 'Una prueba.',
     precio : 50000,

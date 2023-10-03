@@ -16,7 +16,7 @@
   <ion-item>
     <ion-label>
       <font color="red">Utilizando un Accesador
-        <ion-button [routerLink]="['/product-add']">Agregar</ion-button>
+        <ion-button [routerLink]="['/producto/add']">Agregar</ion-button>
       </font>
     </ion-label>
   </ion-item>
@@ -27,8 +27,6 @@
       <ion-icon name="star" slot="start"></ion-icon>
       <!-- Campos de item -->
       <ion-label>{{p.precio | currency:' ':true:'1.0-2'}}</ion-label>
-      <!-- Icono al final -->
-      <ion-icon name="information-circle" slot="end"></ion-icon>
       <!-- routerlink salta a otra pagina-->
       <ion-button [routerLink]="['/product-edit/',p.id]">Edit</ion-button><br />
       <!-- routerlink salta a otra pagina, pero con id del item-->
