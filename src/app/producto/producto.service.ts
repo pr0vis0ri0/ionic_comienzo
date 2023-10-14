@@ -33,8 +33,8 @@ export class ProductoService {
     console.log("RESTful API enviando GET ")
     return this.http.get<Producto[]>(api_prod)
       .pipe(
-        tap(r => console.log('fetched products.')),
-        catchError(this.handleError('getProducts', []))
+        tap(r => console.log('Productos fetch.')),
+        catchError(this.handleError('Productos', []))
       )
   }
 }

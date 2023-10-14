@@ -8,57 +8,57 @@ const routes: Routes = [
   // },
   {
     path: '',
-    redirectTo: 'cliente/listar',
+    redirectTo: '/login',
     pathMatch: 'full'
   },
+  {
+    path: 'login',
+    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule )
+  },
+  {
+    path: 'registro',
+    loadChildren: () => import('./registro/registro.module').then( m => m.RegistroPageModule)
+  },
   // {
-  //   path: 'login',
-  //   loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule )
+  //   path: 'cliente/listar',
+  //   loadChildren: () => import('./cliente/cliente.listar/cliente.listar.module').then( m => m.ClienteListarPageModule)
   // },
   // {
-  //   path: 'registro',
-  //   loadChildren: () => import('./registro/registro.module').then( m => m.RegistroPageModule)
+  //   path: 'cliente/agregar',
+  //   loadChildren: () => import('./cliente/cliente.agregar/cliente.agregar.module').then( m => m.ClienteAgregarPageModule)
   // },
-  {
-    path: 'cliente/listar',
-    loadChildren: () => import('./cliente/cliente.listar/cliente.listar.module').then( m => m.ClienteListarPageModule)
-  },
-  {
-    path: 'cliente/agregar',
-    loadChildren: () => import('./cliente/cliente.agregar/cliente.agregar.module').then( m => m.ClienteAgregarPageModule)
-  },
-  {
-    path: 'cliente/actualizar',
-    loadChildren: () => import('./cliente/cliente.actualizar/cliente.actualizar.module').then( m => m.ClienteActualizarPageModule)
-  },
-  {
-    path: 'cliente/eliminar',
-    loadChildren: () => import('./cliente/cliente.eliminar/cliente.eliminar.module').then( m => m.ClienteEliminarPageModule)
-  },
-  {
-    path: 'cliente/leer',
-    loadChildren: () => import('./cliente/cliente.leer/cliente.leer.module').then( m => m.ClienteLeerPageModule)
-  },
-  {
-    path: 'producto/add',
-    loadChildren: () => import('./producto/producto.add/producto.add.module').then( m => m.ProductoAddPageModule)
-  },
-  {
-    path: 'producto/list',
-    loadChildren: () => import('./producto/producto.list/producto.list.module').then( m => m.ProductoListPageModule)
-  },
-  {
-    path: 'producto/detail/:id',
-    loadChildren: () => import('./producto/producto.detail/producto.detail.module').then( m => m.ProductoDetailPageModule)
-  },
-  {
-    path: 'producto/edit/:id',
-    loadChildren: () => import('./producto/producto.edit/producto.edit.module').then( m => m.ProductoEditPageModule)
-  },
-  {
-    path: 'producto/all',
-    loadChildren: () => import('./producto/producto.all/producto.all.module').then( m => m.ProductoAllPageModule)
-  },
+  // {
+  //   path: 'cliente/actualizar',
+  //   loadChildren: () => import('./cliente/cliente.actualizar/cliente.actualizar.module').then( m => m.ClienteActualizarPageModule)
+  // },
+  // {
+  //   path: 'cliente/eliminar',
+  //   loadChildren: () => import('./cliente/cliente.eliminar/cliente.eliminar.module').then( m => m.ClienteEliminarPageModule)
+  // },
+  // {
+  //   path: 'cliente/leer',
+  //   loadChildren: () => import('./cliente/cliente.leer/cliente.leer.module').then( m => m.ClienteLeerPageModule)
+  // },
+  // {
+  //   path: 'producto/add',
+  //   loadChildren: () => import('./producto/producto.add/producto.add.module').then( m => m.ProductoAddPageModule)
+  // },
+  // {
+  //   path: 'producto/list',
+  //   loadChildren: () => import('./producto/producto.list/producto.list.module').then( m => m.ProductoListPageModule)
+  // },
+  // {
+  //   path: 'producto/detail/:id',
+  //   loadChildren: () => import('./producto/producto.detail/producto.detail.module').then( m => m.ProductoDetailPageModule)
+  // },
+  // {
+  //   path: 'producto/edit/:id',
+  //   loadChildren: () => import('./producto/producto.edit/producto.edit.module').then( m => m.ProductoEditPageModule)
+  // },
+  // {
+  //   path: 'producto/all',
+  //   loadChildren: () => import('./producto/producto.all/producto.all.module').then( m => m.ProductoAllPageModule)
+  // },
 
 
 
