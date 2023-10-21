@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { LoadingController } from '@ionic/angular';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from '../interfaces/user';
-import { LoginService } from './login.service';
+import { LoginService } from '../services/login.service';
 
 @Component({
     selector: 'app-login',
@@ -25,12 +25,15 @@ export class LoginPage {
             message : 'Iniciando sesión...'
         })
         await loading.present()
-        await this.restApi.iniciarSesion({username: this.iCorreo, password: this.iPassword})
+        await this.restApi.iniciarSesion({
+                username: this.iCorreo, 
+                password: this.iPassword
+            })
             .subscribe({
                 next : (res) => {
                     loading.message = "Sesión iniciada"
                     loading.dismiss()
-                    // this.router.navigate(['/producto/list']);
+                    this.router.navigate(['/propiedades']);
                 },
                 complete : () => {},
                 error : (err) => {

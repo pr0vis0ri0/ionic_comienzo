@@ -1,55 +1,65 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
     <ion-buttons slot="end">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title>
-      Registro Pruebas 
-    </ion-title>
+    <ion-title>Registro</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-item class="ion-padding-horizontal" style="padding-bottom: 8px; padding-top: 8px;">
-    <ion-label position="fixed">Usuario</ion-label>
-    <ion-input type="text" placeholder="Nombre" [(ngModel)]="txUsuario"></ion-input>
-  </ion-item>
-  
-  <ion-item class="ion-padding-horizontal" style="padding-bottom: 8px;">
-    <ion-label position="fixed">Clave</ion-label>
-    <ion-input type="password" [(ngModel)]="txClave" placeholder="Clave"></ion-input>
+  <ion-item lines="none" style="display: flex; justify-content: center; align-items: center;">
+    <img src="assets/img/PROPIEDADES-ELITE-2.png" style="width: 50%; margin: auto;"/>
   </ion-item>
 
-  <ion-item class="ion-padding-horizontal" style="padding-bottom: 8px;">
-    <ion-label position="fixed">Sitio Web</ion-label>
-    <ion-input type="url" [(ngModel)]="txWeb" placeholder="URL Web">
-    </ion-input>
-  </ion-item>
-
-  <ion-item class="ion-padding-horizontal" style="padding-bottom: 8px;">
-    <ion-label position="fixed">Email</ion-label>
-    <ion-input type="email" [(ngModel)]="txMail" placeholder="Correo"></ion-input>
-  </ion-item>
-
-  <ion-item class="ion-padding-horizontal" style="padding-bottom: 8px;">
-    <ion-label position="fixed">Telefono</ion-label>
-    <ion-input type="tel" [(ngModel)]="txTeleFono" placeholder="Teléfono"></ion-input>
-  </ion-item>
-  
-  <ion-item class="ion-padding-horizontal" style="padding-bottom: 8px;">
-    <ion-label position="fixed">Edad</ion-label>
-    <ion-input type="number" [(ngModel)]="txEdad" placeholder="Edad Actual"></ion-input>
-  </ion-item>
-
-  <ion-item class="ion-padding-horizontal">
-    <ion-button (click)="funActualizar()" size="small">
-      <ion-icon slot="start" name="add"></ion-icon>
-      Actualizar Información
-    </ion-button>
-  </ion-item>
-
-  <p [innerHTML]="msg"></p>
+  <ion-grid [fixed]="true">
+    <ion-row style="display: flex; justify-content: center;">
+        <ion-col size="12" size-sm="9">
+            <ion-item class="ion-padding-top ion-padding-horizontal">
+                <ion-icon name="person-outline" color="primary" item-left style="padding-right: 8px;"></ion-icon>
+                <ion-input [(ngModel)]="regNombre" label="Nombre" label-placement="floating" fill="outline" placeholder="Ingrese su nombre"></ion-input>
+            </ion-item>
+        </ion-col>
+        <ion-col size="12" size-sm="9">
+            <ion-item class="ion-padding-horizontal">
+                <ion-icon name="person-add-outline" color="primary" item-left style="padding-right: 8px;"></ion-icon>
+                <ion-input [(ngModel)]="regApellido" label="Apellido" label-placement="floating" fill="outline" placeholder="Ingrese su apellido"></ion-input>
+            </ion-item>
+        </ion-col>
+        <ion-col size="12" size-sm="9">
+          <ion-item class="ion-padding-horizontal">
+              <ion-icon name="mail-outline" color="primary" item-left style="padding-right: 8px;"></ion-icon>
+              <ion-input [(ngModel)]="regCorreo" label="Correo electrónico" label-placement="floating" fill="outline" placeholder="Este será usado para iniciar sesión" type="email"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col size="12" size-sm="9">
+          <ion-item class="ion-padding-horizontal">
+              <ion-icon name="key-outline" color="primary" item-left style="padding-right: 8px;"></ion-icon>
+              <ion-input [(ngModel)]="regPassword" label="Contraseña" label-placement="floating" fill="outline" placeholder="Contraseña" type="password"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col size="12" size-sm="9">
+          <ion-item class="ion-padding-horizontal">
+              <ion-icon name="key-outline" color="primary" item-left style="padding-right: 8px;"></ion-icon>
+              <ion-input [(ngModel)]="regCheckPassword" label="Confirmar contraseña" label-placement="floating" fill="outline" placeholder="Se verificará que sean iguales" type="password"></ion-input>
+          </ion-item>
+        </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid [fixed]="true">
+      <ion-row>
+          <ion-col size="4" offset="2">
+              <ion-button (click)="registerUser()" fill="outline" expand="block" size="small">
+                  <ion-icon slot="start" name="duplicate-outline"></ion-icon>
+                  Registrarse
+              </ion-button>
+          </ion-col>
+          <ion-col size="4">
+              <ion-button (click)="goToLogin()" fill="outline" expand="block" size="small">
+                  <ion-icon slot="start" name="log-in-outline"></ion-icon>
+                  Iniciar Sesión
+              </ion-button>
+          </ion-col>
+      </ion-row>
+  </ion-grid>
 </ion-content>

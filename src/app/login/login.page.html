@@ -1,31 +1,34 @@
 <ion-header [translucent]="true">
     <ion-toolbar>
-        <!-- <ion-buttons slot="start">
-            <ion-menu-button></ion-menu-button>
-        </ion-buttons> -->
+        <ion-buttons slot="end">
+            <ion-back-button></ion-back-button>
+          </ion-buttons>
         <ion-title>Autentificación</ion-title>
     </ion-toolbar>
 </ion-header>
 
 <ion-content>
-    <ion-list>
-        <ion-item lines="none" style="display: flex; justify-content: center; align-items: center; height: 200px;">
-            <!-- <ion-row class="ion-justify-content-center ion-align-items-center" style="height: 100%;">
-                <ion-col class="ion-text-center"> -->
-                    <img src="assets/img/PROPIEDADES-ELITE-2.png" style="width: 50%;"/>
-                <!-- </ion-col>
-            </ion-row> -->
-        </ion-item>
-        <ion-item class="ion-padding-horizontal">
-            <ion-icon name="person" color="primary" item-left style="padding-right: 8px;"></ion-icon>
-            <ion-input [(ngModel)]="iCorreo" label="Correo electrónico" label-placement="floating" fill="outline" placeholder="Ingrese su correo"></ion-input>
-        </ion-item>
-        <ion-item class="ion-padding-bottom ion-padding-horizontal">
-            <ion-icon name="lock-closed" color="primary" item-left style="padding-right: 8px;"></ion-icon>
-            <ion-input [(ngModel)]="iPassword" label="Contraseña" label-placement="floating" fill="outline" placeholder="Ingrese su contraseña" type="password"></ion-input>
-        </ion-item>
-    </ion-list>
-    <ion-grid fixed>
+    <ion-item lines="none" style="display: flex; justify-content: center; align-items: center;">
+        <img src="assets/img/PROPIEDADES-ELITE-2.png" style="width: 50%; margin: auto;"/>
+    </ion-item>
+
+    <ion-grid [fixed]="true">
+        <ion-row style="display: flex; justify-content: center;">
+            <ion-col size="12" size-sm="9">
+                <ion-item class="ion-padding-top ion-padding-horizontal">
+                    <ion-icon name="person-outline" color="primary" item-left style="padding-right: 8px;"></ion-icon>
+                    <ion-input [(ngModel)]="iCorreo" label="Correo electrónico" label-placement="floating" fill="outline" placeholder="Ingrese su correo"></ion-input>
+                </ion-item>
+            </ion-col>
+            <ion-col size="12" size-sm="9">
+                <ion-item class="ion-padding-bottom ion-padding-horizontal">
+                    <ion-icon name="key-outline" color="primary" item-left style="padding-right: 8px;"></ion-icon>
+                    <ion-input [(ngModel)]="iPassword" label="Contraseña" label-placement="floating" fill="outline" placeholder="Ingrese su contraseña" type="password"></ion-input>
+                </ion-item>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+    <ion-grid [fixed]="true">
         <ion-row>
             <ion-col size="4" offset="2">
                 <ion-button fill="outline" expand="block" (click)="loginUser()" size="small">
