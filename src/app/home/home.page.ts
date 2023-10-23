@@ -69,6 +69,7 @@ export class HomePage implements OnInit {
           loading.dismiss()
           console.log(res.url)
           console.log(res.token)
+          console.log(res.url + '?token_ws=' + res.token)
           // const redirect = (url : string, asLink = true) => asLink ? (window.location.href = url) : window.location.replace(url);
           // this.router.navigate(['/transbank', res.token])
           window.location.href= res.url + '?token_ws=' + res.token
