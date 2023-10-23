@@ -22,7 +22,11 @@ const routes: Routes = [
   {
     path: 'propiedades',
     loadChildren: () => import('./propiedades/propiedades.module').then( m => m.PropiedadesPageModule)
-  }
+  },  {
+    path: 'inicio',
+    loadChildren: () => import('./inicio/inicio.module').then( m => m.InicioPageModule)
+  },
+
   // {
   //   path: 'cliente/listar',
   //   loadChildren: () => import('./cliente/cliente.listar/cliente.listar.module').then( m => m.ClienteListarPageModule)

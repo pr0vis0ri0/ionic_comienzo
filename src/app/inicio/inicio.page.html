@@ -1,0 +1,67 @@
+
+  
+<ion-content>
+
+  <swiper-container (slidechange)="swiperSlideChanged($event)"
+  [loop]="true"
+  [zoom]="true">
+    <swiper-slide *ngFor ="let imagen of imagenes">
+        <img class="imagenc" [src]="imagen"/> 
+      
+    </swiper-slide>
+  </swiper-container>
+
+<ion-row>
+  <ion-col size="6">
+    <ion-card class="taryi">
+      <img src="assets/logos/adi.png" alt="">
+    </ion-card>
+  </ion-col>
+  <ion-col size="6">
+    <ion-card class="taryi">
+      <img src="assets/logos/logo-ministerio.png" alt="">
+    </ion-card>
+  </ion-col>
+</ion-row>
+
+  
+    <ion-card class="taryi1">
+      <img src="assets/logos/logo-nautica.png" alt="">
+    </ion-card>
+
+
+
+<ion-row class="caco">
+
+  <ion-col size="12">
+    <ion-card class="baki">
+      <img src="assets/logos/COMPRAR-DEPARTAMENTO.png" alt="Descripción de la imagen">
+      <ion-card-header>
+        <ion-card-title>Comprar departamento</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        Encuentra tu lugar con una experiencia fotografica inmersiva y la mayoria de las cosas que incluyen cosas que ningun otro lugar tiene
+      </ion-card-content>
+      <ion-button class="btnc">Buscar departamentos</ion-button>
+    </ion-card> 
+  </ion-col>
+
+  <ion-col size="12"  >
+    <ion-card >
+      <img src="assets/logos/ARRENDAR-DEPARTAMENTO.png" alt="">
+      <ion-card-header>
+        <ion-card-title>Arrendar departamento</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        Estamos creando una experiencia en linea perfecta, desde comprar en la red de alquileres mas grande, hasta  aplicar y pagar la renta, ademas de distintos tipos de financiamiento
+      </ion-card-content>
+      <ion-button class="btnc" >Encuentra departamentos</ion-button>
+    </ion-card>
+  </ion-col>
+
+
+
+
+</ion-row>
+
+</ion-content>

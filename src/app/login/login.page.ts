@@ -33,7 +33,7 @@ export class LoginPage {
                 next : (res) => {
                     loading.message = "Sesión iniciada"
                     loading.dismiss()
-                    this.router.navigate(['/propiedades']);
+                    this.router.navigate(['/inicio']);
                 },
                 complete : () => {},
                 error : (err) => {
