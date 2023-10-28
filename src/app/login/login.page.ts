@@ -31,6 +31,7 @@ export class LoginPage {
             })
             .subscribe({
                 next : (res) => {
+                    localStorage.setItem('token', res.access || "ERROR")
                     loading.message = "Sesión iniciada"
                     loading.dismiss()
                     this.router.navigate(['/propiedades']);

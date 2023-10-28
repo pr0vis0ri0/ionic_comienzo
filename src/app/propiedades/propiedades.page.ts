@@ -11,15 +11,34 @@ import { PropiedadesService } from '../services/propiedades.service';
 })
 export class PropiedadesPage implements OnInit {
 
-  constructor(public router : Router, public restApi: PropiedadesService, public loadingController : LoadingController) { }
+  constructor(public router : Router,  public restApi: PropiedadesService, public loadingController : LoadingController) {}
+
+  propiedades : Propiedades[] = []
+  regiones : any[] = []
+  comunas: any[] = []
+  IdRegionSeleccionado : number = 0;
+
+  // Para filtros
+  id_comuna : number = 0
+  valor_desde : number = 0
+  valor_hasta: number = 0
+  es_arriendo : boolean = false
+  es_venta : boolean = false
 
   ngOnInit() {
-    this.getPropiedades();
+    this.checkToken()
+    this.getRegiones()
+    this.getPropiedades()
   }
-  propiedades : Propiedades[] = []
+
+  checkToken() {
+    const token = localStorage.getItem('token')
+    if (token == null) {
+      this.router.navigate(['/login']);
+    }
+  }
 
   async getPropiedades() {
-    console.log("Entrando :getPropiedades")
     const loading = await this.loadingController.create({
       message : 'Buscando propiedades...'
     })
@@ -38,6 +57,47 @@ export class PropiedadesPage implements OnInit {
       })
   }
 
+  getRegiones() {
+    this.restApi.devolerRegiones().subscribe({
+      next : (region) => {
+        this.regiones = region;
+      }
+    })
+  }
+
+  buscarComunas() {
+    this.restApi.devolverComunas(this.IdRegionSeleccionado).subscribe({
+      next : (comuna) => {
+        this.comunas = comuna;
+      }
+    })
+  }
+
+  // filtrarPropiedades() {
+  //   this.restApi.devolverPropiedadesFiltradas(this.id_comuna, this.valor_desde, this.valor_hasta, this.es_arriendo, this.es_venta).subscribe({
+  //     next : (propiedad) => {
+  //       this.propiedades = propiedad;
+  //     }
+  //   })
+  //   // haz un console log con todas las variables
+  //   console.log("id_comuna : ", this.id_comuna)
+  //   console.log("valor_desde : ", this.valor_desde)
+  //   console.log("valor_hasta : ", this.valor_hasta)
+  //   console.log("es_arriendo : ", this.es_arriendo)
+  //   console.log("es_venta : ", this.es_venta)
+  // }
+
+  filtrarPropiedades() {
+    this.restApi.devolverPropiedadesFiltradas(this.id_comuna, this.valor_desde, this.valor_hasta, this.es_arriendo, this.es_venta).subscribe({
+      next : (resultado) => {
+        if (resultado && typeof resultado === 'object' && !(resultado instanceof Array)) {
+          this.propiedades = [resultado];
+        } else {
+          this.propiedades = resultado;
+        }
+      }
+    })
+  }
   verDetallePropiedad(id : number) {
     this.router.navigate(['/detalle_propiedad', id]);
   }

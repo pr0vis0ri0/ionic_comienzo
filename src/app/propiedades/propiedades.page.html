@@ -1,7 +1,4 @@
 <ion-header>
-  <!-- <ion-toolbar color="primary">
-    <ion-title>Hogares Deluxe</ion-title>
-  </ion-toolbar> -->
   <ion-toolbar color="light">
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
@@ -27,79 +24,55 @@
   <ion-card>
     <ion-card-header>
       <ion-card-title>¡Busca tu hogar!</ion-card-title>
-      <!-- <ion-card-subtitle>Filtro</ion-card-subtitle> -->
     </ion-card-header>
   
     <ion-card-content>
       <ion-list lines="full">
         <ion-item>
           <ion-label>Región:</ion-label>
-          <ion-select placeholder="Escoge Región"></ion-select>
+          <ion-select [(ngModel)]="IdRegionSeleccionado" (ionChange)="buscarComunas()" placeholder="Escoge Región">
+            <ion-select-option *ngFor="let region of regiones" [value]="region.id_region">{{region.nombre_region}}</ion-select-option>
+          </ion-select>
         </ion-item>
         <ion-item>
           <ion-label>Comuna:</ion-label>
-          <ion-select placeholder="Escoge Comuna"></ion-select>
+          <ion-select [(ngModel)]="id_comuna" placeholder="Escoge Comuna">
+            <ion-select-option *ngFor="let comuna of comunas" [value]="comuna.id_comuna">{{comuna.nombre_comuna}}</ion-select-option>
+          </ion-select>
         </ion-item>
         <ion-item>
           <ion-label>Precio desde:</ion-label>
-          <ion-input type="number" placeholder="$ 0"></ion-input>
+          <ion-input [(ngModel)]="valor_desde" type="number" placeholder="$0"></ion-input>
         </ion-item>
         <ion-item>
           <ion-label>Precio hasta:</ion-label>
-          <ion-input type="number" placeholder="$ 0"></ion-input>
+          <ion-input [(ngModel)]="valor_hasta" type="number" placeholder="$0"></ion-input>
         </ion-item>
         <ion-item>
           <ion-label>Arriendo</ion-label>
-          <ion-radio-group>
-            <ion-radio slot="start" value="arriendo"></ion-radio>
+          <ion-radio-group [(ngModel)]="es_arriendo">
+            <ion-radio slot="start" value="true"></ion-radio>
           </ion-radio-group>
         </ion-item>
         <ion-item>
           <ion-label>Venta</ion-label>
-          <ion-radio-group>
-            <ion-radio slot="start" value="venta"></ion-radio>
+          <ion-radio-group [(ngModel)]="es_venta">
+            <ion-radio slot="start" value="true"></ion-radio>
           </ion-radio-group>
         </ion-item>
       </ion-list>
-      <ion-button expand="block">Buscar</ion-button>
+      <ion-grid>
+        <ion-row style="display: flex; justify-content: center;">
+          <ion-col style="display: flex; justify-content: center;" size="6">
+            <ion-button size="default" fill="outline" (click)="filtrarPropiedades()">Buscar</ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
     </ion-card-content>
   </ion-card>
 
-  <!-- <div class="search-section">
-    <h2>¡Busca tu Hogar!</h2>
-    <ion-list lines="full">
-      <ion-item>
-        <ion-label>Región:</ion-label>
-        <ion-select placeholder="Escoge Región"></ion-select>
-      </ion-item>
-      <ion-item>
-        <ion-label>Comuna:</ion-label>
-        <ion-select placeholder="Escoge Comuna"></ion-select>
-      </ion-item>
-      <ion-item>
-        <ion-label>Precio desde:</ion-label>
-        <ion-input type="number" placeholder="$ 0"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label>Precio hasta:</ion-label>
-        <ion-input type="number" placeholder="$ 0"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label>Arriendo</ion-label>
-        <ion-radio-group>
-          <ion-radio slot="start" value="arriendo"></ion-radio>
-        </ion-radio-group>
-      </ion-item>
-      <ion-item>
-        <ion-label>Venta</ion-label>
-        <ion-radio-group>
-          <ion-radio slot="start" value="venta"></ion-radio>
-        </ion-radio-group>
-      </ion-item>
-    </ion-list>
-    <ion-button expand="block">Buscar</ion-button>
-  </div> -->
-  <ion-card *ngFor = "let p of propiedades">
+
+  <ion-card *ngFor="let p of propiedades">
     <div *ngIf="p.nombre_tipo_propiedad == 'Departamento' else blockCasa">
       <img alt="Silhouette of mountains" src="assets/img/departamento-id-x.jpg" />
     </div>
@@ -125,19 +98,4 @@
       </div>
     </ion-card-content>
   </ion-card>
-
-  <!-- <ion-grid>
-    <ion-row>
-      <ion-col size="4">
-        <div class="property-card">
-          <img src="url-imagen-propiedad" alt="Propiedad">
-          <h3>Nombre Propiedad</h3>
-          <p>Descripción corta</p>
-          <h4>Precio</h4>
-          <ion-button expand="block">Ver propiedad</ion-button>
-        </div>
-      </ion-col>
-    </ion-row>
-  </ion-grid> -->
 </ion-content>
-

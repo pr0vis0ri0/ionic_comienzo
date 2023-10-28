@@ -28,11 +28,19 @@ export class HomePage implements OnInit {
   d! : DetallePropiedad;
 
   ngOnInit() {
+    this.checkToken()
     this.propiedadId = this.route.snapshot.paramMap.get('id');
     if (this.propiedadId !== null) {
       this.getDetallePropiedad(parseInt(this.propiedadId));
     } else {
       this.propiedadId = '';
+    }
+  }
+
+  checkToken() {
+    const token = localStorage.getItem('token')
+    if (token == null) {
+      this.router.navigate(['/login']);
     }
   }
   
@@ -45,7 +53,6 @@ export class HomePage implements OnInit {
       .subscribe({
         next : (res) => {
           this.d = res;
-          console.log("Detalle Propiedad : ", this.d)
           loading.dismiss()
         },
         complete : () => {},
