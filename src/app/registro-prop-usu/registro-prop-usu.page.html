@@ -1,0 +1,61 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Formulario de registro de usuario</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+  <ion-button id="open-modal" expand="block" style="color: black;">Abrir Formulario</ion-button>
+  <p>{{ message }}</p>
+  <ion-modal trigger="open-modal" (willDismiss)="onWillDismiss($event)">
+
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-buttons slot="start">
+            <ion-button (click)="cancel()">Cancelar</ion-button>
+          </ion-buttons>
+          <ion-title>Bienvenido</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="confirm()" [strong]="true">Confirmar</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content >
+<!-- Formulario tipo modal para registro de propiedad (por mejorar) -->
+        
+            <ion-item class="modals">
+              <label for="nombrep">Nombre: </label>
+              <input type="text" placeholder="Ingrese su nombre" for="nombrep" [(ngModel)]="nombrep">
+            </ion-item>
+
+            <ion-item >
+                <label>Estado Propiedad:</label>
+                <label for="pendiente" id="lbl">Pendiente</label>
+                <input type="radio"[(ngModel)]="estadopropiedad" value="pendiente"   id="it" name="pendiente">
+                <label for="vendida" id="lbl">Vendida</label>
+                <input type="radio"[(ngModel)]="estadopropiedad" value="vendida"  id="it" name="vendida">
+                
+              </ion-item>
+            
+            <ion-item class="modals">
+              <label for="valorpropiedad">Valor Propiedad: </label>
+              <input type="number" placeholder="Ingrese el valor de su propiedad" for="valorpropiedad" [(ngModel)]="valorpropiedad">
+            </ion-item>
+          
+            <ion-item class="modals">
+              <label for="tpropiedad">Tipo de propiedad: </label>
+              <input type="text" placeholder="Ingrese el tipo de propiedad" for="tpropiedad" [(ngModel)]="tpropiedad">
+            </ion-item>
+              <ion-item class="modals">
+                <label for="region">Region: </label>
+                <input type="text" placeholder="Ingrese la region" for="region" [(ngModel)]="region">
+              </ion-item>
+
+              <ion-item class="modals">
+                <label for="comuna">Comuna: </label>
+                <input type="text" placeholder="Ingrese la comuna" for="comuna" [(ngModel)]="comuna">
+              </ion-item>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+</ion-content>
