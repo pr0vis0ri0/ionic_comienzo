@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LoadingController } from '@ionic/angular';
 import { ActivatedRoute, Router } from '@angular/router';
-import { User } from '../interfaces/user';
 import { LoginService } from '../services/login.service';
 
 @Component({

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LoadingController } from '@ionic/angular';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Propiedades } from '../interfaces/propiedades';
+import { Propiedad } from '../interfaces/interface';
 import { PropiedadesService } from '../services/propiedades.service';
 
 @Component({
@@ -13,7 +13,7 @@ export class PropiedadesPage implements OnInit {
 
   constructor(public router : Router,  public restApi: PropiedadesService, public loadingController : LoadingController) {}
 
-  propiedades : Propiedades[] = []
+  propiedades : Propiedad[] = []
   regiones : any[] = []
   comunas: any[] = []
   IdRegionSeleccionado : number = 0;
@@ -73,20 +73,6 @@ export class PropiedadesPage implements OnInit {
     })
   }
 
-  // filtrarPropiedades() {
-  //   this.restApi.devolverPropiedadesFiltradas(this.id_comuna, this.valor_desde, this.valor_hasta, this.es_arriendo, this.es_venta).subscribe({
-  //     next : (propiedad) => {
-  //       this.propiedades = propiedad;
-  //     }
-  //   })
-  //   // haz un console log con todas las variables
-  //   console.log("id_comuna : ", this.id_comuna)
-  //   console.log("valor_desde : ", this.valor_desde)
-  //   console.log("valor_hasta : ", this.valor_hasta)
-  //   console.log("es_arriendo : ", this.es_arriendo)
-  //   console.log("es_venta : ", this.es_venta)
-  // }
-
   filtrarPropiedades() {
     this.restApi.devolverPropiedadesFiltradas(this.id_comuna, this.valor_desde, this.valor_hasta, this.es_arriendo, this.es_venta).subscribe({
       next : (resultado) => {
@@ -98,7 +84,9 @@ export class PropiedadesPage implements OnInit {
       }
     })
   }
+
   verDetallePropiedad(id : number) {
     this.router.navigate(['/detalle_propiedad', id]);
   }
+  
 }

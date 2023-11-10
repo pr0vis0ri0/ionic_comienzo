@@ -1,6 +1,5 @@
 import { Injectable, OnInit } from '@angular/core';
-import { Propiedades } from '../interfaces/propiedades';
-import { DetallePropiedad } from '../interfaces/detalle_propiedad';
+import { Propiedad, DetallePropiedad } from '../interfaces/interface';
 import { Observable, of, throwError } from 'rxjs';
 import { catchError, tap, map } from 'rxjs/operators';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http'
@@ -30,12 +29,12 @@ export class PropiedadesService implements OnInit {
         }
     }
 
-    devolverListaPropiedades(): Observable<Propiedades[]> {
+    devolverListaPropiedades(): Observable<Propiedad[]> {
         console.log("RESTful API enviando GET Lista Propiedades");
-        return this.http.get<Propiedades[]>(ruta_lista_propiedades)
+        return this.http.get<Propiedad[]>(ruta_lista_propiedades)
           .pipe(
-            tap((propiedad: Propiedades[]) => console.log(propiedad)),
-            catchError(this.handleError<Propiedades[]>('ERROR: Lista Propiedades'))
+            tap((propiedad: Propiedad[]) => console.log(propiedad)),
+            catchError(this.handleError<Propiedad[]>('ERROR: Lista Propiedades'))
           );
     }
 
@@ -79,10 +78,10 @@ export class PropiedadesService implements OnInit {
         es_arriendo : es_arriendo,
         es_venta : es_venta
       }
-      return this.http.post<any>(url, body, httpOptions)
+      return this.http.post<Propiedad>(url, body, httpOptions)
         .pipe(
-          tap((propiedad: any) => console.log(propiedad)),
-          catchError(this.handleError<any>('ERROR: Propiedades Filtradas'))
+          tap((propiedad: Propiedad) => console.log(propiedad)),
+          catchError(this.handleError<Propiedad>('ERROR: Propiedades Filtradas'))
         );
     }
 }

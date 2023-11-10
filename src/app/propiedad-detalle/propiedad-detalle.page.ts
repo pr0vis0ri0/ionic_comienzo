@@ -1,26 +1,25 @@
 import { Component, OnInit } from '@angular/core';
 import { LoadingController } from '@ionic/angular';
 import { ActivatedRoute, Router } from '@angular/router';
-import { DetallePropiedad } from '../interfaces/detalle_propiedad';
+import { DetallePropiedad } from '../interfaces/interface';
 import { PropiedadesService } from '../services/propiedades.service';
 import { TransbankService } from '../services/transbank.service';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: 'home.page.html',
-  styleUrls: ['home.page.scss'],
+  selector: 'app-propiedad-detalle',
+  templateUrl: './propiedad-detalle.page.html',
+  styleUrls: ['./propiedad-detalle.page.scss'],
 })
-
-
-
-export class HomePage implements OnInit {
+export class PropiedadDetallePage implements OnInit {
   propiedadId! : string | null;
 
-  constructor(public router : Router, 
-              public restApi: PropiedadesService,
-              public transbankApi: TransbankService,
-              public loadingController : LoadingController, 
-              private route : ActivatedRoute) {
+  constructor(
+    public router : Router, 
+    public restApi: PropiedadesService,
+    public transbankApi: TransbankService,
+    public loadingController : LoadingController, 
+    private route : ActivatedRoute
+  ) {
     this.propiedadId = ''
     const id = this.route.snapshot.paramMap.get('id');
   }
@@ -88,4 +87,5 @@ export class HomePage implements OnInit {
         }
       })
   }
+
 }
