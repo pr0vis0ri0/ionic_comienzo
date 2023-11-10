@@ -84,7 +84,7 @@ export class PropiedadesPage implements OnInit {
       }
     })
   }
-
+  
   verDetallePropiedad(id : number) {
     this.router.navigate(['/detalle_propiedad', id]);
   }
