@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { LoadingController } from '@ionic/angular';
 import { Router } from '@angular/router';
-import { IonModal } from '@ionic/angular';
 import { OverlayEventDetail } from '@ionic/core/components';
 import { PropiedadesService } from '../services/propiedades.service';
 import { Propiedad } from '../interfaces/interface';
@@ -15,6 +14,10 @@ export class VistaUsuarioPage implements OnInit {
   propiedades: Propiedad[];
   registro_propiedad: boolean = false; // Booleano que inicializa el modal de registro de propiedad de PrimeNG
   indexActivo: number = 0;
+  idRegionSeleccionado : number = 0;
+  idComunaSeleccionada : number = 0;
+  regiones: any[] = [];
+  comunas: any[] = [];
 
   constructor(
     // private loading: LoadingController, 
@@ -23,6 +26,11 @@ export class VistaUsuarioPage implements OnInit {
     ) { }
 
   ngOnInit() {
+    this.buscarPropiedadesEjemplo()
+    this.buscarRegiones()
+  }
+
+  async buscarPropiedadesEjemplo() {
     this.api.devolverListaPropiedades()
       .subscribe({
         next : (data) => {
@@ -31,10 +39,29 @@ export class VistaUsuarioPage implements OnInit {
       })
   }
 
+  buscarRegiones() {
+    this.api.devolerRegiones().subscribe({
+      next : (region) => {
+        this.regiones = region;
+      }
+    })
+  }
+
+  buscarComunas() {
+    this.api.devolverComunas(this.idRegionSeleccionado).subscribe({
+      next : (comuna) => {
+        this.comunas = comuna;
+      }
+    })
+  }
+
   showDialog() {
     this.registro_propiedad = true;
   }
   
+  checkTipo() {
+    
+  }
 
 
 
