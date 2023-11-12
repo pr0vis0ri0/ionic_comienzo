@@ -26,3 +26,13 @@ export interface User {
     last_name?: string;
     access? : string
 }
+
+export interface JwtPayload {
+    exp: number;
+    iat: number;
+    id_perfil: number;
+    id_usuario: number;
+    jti: string;
+    token_type: string;
+    user_id: number;
+}

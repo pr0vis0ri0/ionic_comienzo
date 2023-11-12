@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { LoadingController } from '@ionic/angular';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Propiedad } from '../interfaces/interface';
+import { Propiedad, JwtPayload } from '../interfaces/interface';
 import { PropiedadesService } from '../services/propiedades.service';
+import { jwtDecode } from 'jwt-decode'
+
 
 @Component({
   selector: 'app-propiedades',
