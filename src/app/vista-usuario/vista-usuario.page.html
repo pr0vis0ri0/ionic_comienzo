@@ -137,49 +137,44 @@
     <div id="modal_registro" class="card flex justify-content-center">
       <p-dialog header="Registro de Propiedad" [(visible)]="registro_propiedad" [modal]="true" [style]="{ width: '80vw', height: '80vh' }" [draggable]="false" [resizable]="false">
         <p-tabView [(activeIndex)]="indexActivo">
-          <p-tabPanel header="Datos Base" style="padding: 0px;">
-            <ion-item>
-              <ion-label position="floating">ID</ion-label>
+          <p-tabPanel header="Datos Base">
+            <ion-item class="ion-no-padding">
+              <ion-label position="floating">Valor Propiedad</ion-label>
               <ion-input type="text"></ion-input>
             </ion-item>
-            <ion-item>
-              <ion-label position="floating">Nombre</ion-label>
+            <ion-item class="ion-no-padding">
+              <ion-label position="floating">Tipo de Propiedad</ion-label>
               <ion-input type="text"></ion-input>
             </ion-item>
-            <ion-item>
-              <ion-label position="floating">Edad</ion-label>
-              <ion-input type="number"></ion-input>
+            <ion-item class="ion-no-padding">
+              <ion-label position="floating">Región:</ion-label>
+              <ion-select [(ngModel)]="idRegionSeleccionado" (ionChange)="buscarComunas()" placeholder="Escoge Región">
+                <ion-select-option *ngFor="let region of regiones" [value]="region.id_region">{{region.nombre_region}}</ion-select-option>
+              </ion-select>
             </ion-item>
-            <ion-item>
-              <ion-label position="floating">Raza</ion-label>
-              <ion-input type="text"></ion-input>
+            <ion-item class="ion-no-padding">
+              <ion-label position="floating">Comuna:</ion-label>
+              <ion-select [(ngModel)]="idComunaSeleccionada" placeholder="Escoge Comuna">
+                <ion-select-option *ngFor="let comuna of comunas" [value]="comuna.id_comuna">{{comuna.nombre_comuna}}</ion-select-option>
+              </ion-select>
             </ion-item>
-            <ion-item>
+            <ion-item class="ion-no-padding">
               <ion-label position="floating">Descripción</ion-label>
-              <ion-input type="text"></ion-input>
+              <ion-input type="text"></ion-input> 
             </ion-item>
+            <div class="checkboxes">
+              <ion-item class="ion-padding-top ion-no-padding" lines="none">
+                <ion-checkbox (ionChange)="checkTipo()">¿Es arriendo?</ion-checkbox>
+              </ion-item>
+              <ion-item class="ion-no-padding" lines="none">
+                <ion-checkbox (ionChange)="checkTipo()">¿Es venta?</ion-checkbox>
+              </ion-item>
+            </div>
+          </p-tabPanel>
+          <p-tabPanel header="Características">
+            <p>Hola chavales</p>
           </p-tabPanel>
         </p-tabView>
-          <ion-item class="ion-padding-horizontal">
-            <ion-label position="floating">ID</ion-label>
-            <ion-input type="text"></ion-input>
-          </ion-item>
-          <ion-item class="ion-padding-horizontal">
-            <ion-label position="floating">Nombre</ion-label>
-            <ion-input type="text"></ion-input>
-          </ion-item>
-          <ion-item class="ion-padding-horizontal">
-            <ion-label position="floating">Edad</ion-label>
-            <ion-input type="number"></ion-input>
-          </ion-item>
-          <ion-item class="ion-padding-horizontal">
-            <ion-label position="floating">Raza</ion-label>
-            <ion-input type="text"></ion-input>
-          </ion-item>
-          <ion-item class="ion-padding-horizontal">
-            <ion-label position="floating">Descripción</ion-label>
-            <ion-input type="text"></ion-input>
-          </ion-item>
       </p-dialog>
     </div>
 
