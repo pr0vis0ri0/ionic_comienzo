@@ -21,8 +21,26 @@ const routes: Routes = [
   },
   {
     path: 'detalle_propiedad/:id',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
+    loadChildren: () => import('./propiedad-detalle/propiedad-detalle.module').then( m => m.PropiedadDetallePageModule)
   },
+  {
+    path: 'vista-usuario',
+    loadChildren: () => import('./vista-usuario/vista-usuario.module').then( m => m.VistaUsuarioPageModule)
+  },
+  {
+    path: 'perfil',
+    loadChildren: () => import('./perfil/perfil.module').then( m => m.PerfilPageModule)
+  },
+  {
+    path: 'formulario',
+    loadChildren: () => import('./formulario/formulario.module').then( m => m.FormularioPageModule)
+  },
+  {
+    path: 'PagInicio',
+    loadChildren: () => import('./PagInicio/PagInicio.module').then( m => m.PagInicioPageModule)
+  },
+
+  
   // {
   //   path: 'cliente/listar',
   //   loadChildren: () => import('./cliente/cliente.listar/cliente.listar.module').then( m => m.ClienteListarPageModule)
