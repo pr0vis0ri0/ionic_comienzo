@@ -1,13 +1,12 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Formulario de registro de usuario</ion-title>
+    <ion-title>Formulario de registro de propiedad</ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content class="ion-padding">
   <ion-button id="open-modal" expand="block" style="color: black;">Abrir Formulario</ion-button>
   <p>{{ message }}</p>
   <ion-modal trigger="open-modal" (willDismiss)="onWillDismiss($event)">
-
     <ng-template>
       <ion-header>
         <ion-toolbar>
@@ -16,45 +15,46 @@
           </ion-buttons>
           <ion-title>Bienvenido</ion-title>
           <ion-buttons slot="end">
-            <ion-button (click)="confirm()" [strong]="true">Confirmar</ion-button>
+            <ion-button (click)="enviar()" [disabled]="!ContactForm.valid" [strong]="true">Confirmar</ion-button>
           </ion-buttons>
         </ion-toolbar>
       </ion-header>
       <ion-content >
 <!-- Formulario tipo modal para registro de propiedad (por mejorar) -->
-        
+        <form (ngSubmit)="enviar()" [formGroup]="ContactForm">
             <ion-item class="modals">
-              <label for="nombrep">Nombre: </label>
-              <input type="text" placeholder="Ingrese su nombre" for="nombrep" [(ngModel)]="nombrep">
+              <label for="nombrep" >Nombre: </label>
+              <input formControlName="nombrep" class="inpt">
             </ion-item>
 
             <ion-item >
                 <label>Estado Propiedad:</label>
-                <label for="pendiente" id="lbl">Pendiente</label>
-                <input type="radio"[(ngModel)]="estadopropiedad" value="pendiente"   id="it" name="pendiente">
-                <label for="vendida" id="lbl">Vendida</label>
-                <input type="radio"[(ngModel)]="estadopropiedad" value="vendida"  id="it" name="vendida">
+                <label id="lbl">Pendiente</label>
+                <input type="radio"formControlName="estadopropiedad"   id="it" name="estadopropiedad">
+                <label  id="lbl">Vendida</label>
+                <input type="radio"  formControlName="estadopropiedad"  id="it" name="estadopropiedad">
                 
               </ion-item>
             
             <ion-item class="modals">
               <label for="valorpropiedad">Valor Propiedad: </label>
-              <input type="number" placeholder="Ingrese el valor de su propiedad" for="valorpropiedad" [(ngModel)]="valorpropiedad">
+              <input type="number"  formControlName="valorpropiedad" class="inpt">
             </ion-item>
           
             <ion-item class="modals">
               <label for="tpropiedad">Tipo de propiedad: </label>
-              <input type="text" placeholder="Ingrese el tipo de propiedad" for="tpropiedad" [(ngModel)]="tpropiedad">
+              <input type="text" placeholder="Ingrese el tipo de propiedad"  formControlName="tpropiedad"class="inpt">
             </ion-item>
               <ion-item class="modals">
                 <label for="region">Region: </label>
-                <input type="text" placeholder="Ingrese la region" for="region" [(ngModel)]="region">
+                <input type="text" placeholder="Ingrese la region" formControlName="region"class="inpt">
               </ion-item>
 
               <ion-item class="modals">
                 <label for="comuna">Comuna: </label>
-                <input type="text" placeholder="Ingrese la comuna" for="comuna" [(ngModel)]="comuna">
+                <input type="text" placeholder="Ingrese la comuna"  formControlName="comuna" class="inpt">
               </ion-item>
+          </form>
       </ion-content>
     </ng-template>
   </ion-modal>

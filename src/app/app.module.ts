@@ -8,6 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { registerLocaleData } from '@angular/common';
 import localeCl from '@angular/common/locales/es-CL';
+import { FormsModule } from '@angular/forms';
 
 registerLocaleData(localeCl, 'es-CL');
 
@@ -20,7 +21,8 @@ registerLocaleData(localeCl, 'es-CL');
       mode: 'ios'
     }),
     AppRoutingModule,
-    HttpClientModule],
+    HttpClientModule,
+    FormsModule],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, { provide: localeCl, useValue: 'es-CL' }],
   bootstrap: [AppComponent],
 })

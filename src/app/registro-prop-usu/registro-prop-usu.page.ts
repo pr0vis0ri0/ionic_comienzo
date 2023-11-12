@@ -1,4 +1,5 @@
 import { Component, OnInit,ViewChild } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { IonCheckbox, IonModal } from '@ionic/angular';
 import { OverlayEventDetail } from '@ionic/core/components';
 
@@ -19,11 +20,21 @@ export class RegistroPropUsuPage{
   region:string;
   comuna:string;
 
+  public ContactForm = new FormGroup({
+    nombrep: new FormControl ('',[Validators.required, ]),
+    estadopropiedad: new FormControl('',[Validators.required]),
+    valorpropiedad: new FormControl('',[Validators.required]),
+    tpropiedad: new FormControl('',[Validators.required]),
+    region: new FormControl('',[Validators.required]),
+    comuna: new FormControl('',[Validators.required]),
+  });
+
 
   constructor() { }
 
   
-
+  enviar(){
+  }
 
   cancel() {
     this.modal.dismiss(null, 'cancel');
