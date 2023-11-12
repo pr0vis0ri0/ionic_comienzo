@@ -1,0 +1,99 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Hogares Deluxe</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <ion-card>
+    <img alt="Silhouette of mountains" src="assets/img/casa-id-x.jpg" />
+    <ion-card-header>
+      <ion-card-title>Propiedad {{ d?.id_propiedad }}</ion-card-title>
+      <ion-card-subtitle>{{d?.nombre_comuna}}, {{d?.nombre_region}}</ion-card-subtitle>
+    </ion-card-header>
+  
+    <ion-card-content style="text-align: justify;">
+      ¡Haz tuyo el estilo de vida urbano! Disfruta de la comodidad y modernidad de un departamento. Vive rodeado de la energía de la ciudad, con todas las facilidades al alcance de tu mano. Es momento de dar el salto y encontrar tu espacio perfecto.
+    </ion-card-content>
+    <ion-card-content>
+      <div style="display: flex; justify-content: space-between;">
+        <div *ngIf="d?.es_arriendo">
+          <h2><strong>Arriendo {{ d?.valor_propiedad | currency:'$':'symbol':'1.0-2' }}</strong></h2>
+        </div>
+        <div *ngIf="d?.es_venta">
+          <h2><strong>Venta {{ d?.valor_propiedad | currency:'$':'symbol':'1.0-2' }}</strong></h2>
+        </div>
+      </div>
+      <div style="display: flex; justify-content: space-between;">
+        <div>
+          <ion-button expand="block" size="small">¿Reservar?</ion-button>
+        </div>
+        <div class="btn-pagar">
+          <ion-button (click)="pagarReserva()" expand="block" size="small" >Pagar</ion-button>
+        </div>
+      </div>
+      
+      <ion-list>
+        <ion-item lines="none">
+          <ion-icon name="square-outline" slot="start" color="primary"></ion-icon>
+          {{d?.metros_totales}} m² totales
+        </ion-item>
+        <ion-item lines="none">
+          <ion-icon name="square-outline" slot="start" color="primary"></ion-icon>
+          {{d?.metros_utiles}} m² útiles
+        </ion-item>
+        <ion-item lines="none">
+          <ion-icon name="bed-outline" slot="start" color="primary"></ion-icon>
+          {{d?.cant_dormitorios}} dormitorio/s
+        </ion-item>
+        <ion-item lines="none">
+          <ion-icon name="water-outline" slot="start" color="primary"></ion-icon>
+          {{d?.cant_banos}} baño/s
+        </ion-item>
+        <ion-item lines="none">
+          <ion-icon name="paw-outline" slot="start" color="primary"></ion-icon>
+          <div *ngIf = "d?.permite_mascotas ; else blockMascota">
+            Permite mascotas
+          </div>
+          <ng-template #blockMascota>
+            <div>
+              No permite mascotas
+            </div>
+          </ng-template>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-icon name="cube-outline" slot="start" color="primary"></ion-icon>
+          <div *ngIf = "d?.tiene_bodega ; else blockBodega">
+            Tiene bodega
+          </div>
+          <ng-template #blockBodega>
+            <div>
+              No tiene bodega
+            </div>
+          </ng-template>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-icon name="car-outline" slot="start" color="primary"></ion-icon>
+          <div *ngIf = "d?.tiene_estacionamiento ; else blockEstacionamiento">
+            Tiene estacionamiento
+          </div>
+          <ng-template #blockEstacionamiento>
+            <div>
+              No tiene estacionamiento
+            </div>
+          </ng-template>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    © 2023 Hogares Deluxe LTDA.
+  </ion-toolbar>
+</ion-footer>

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LoadingController } from '@ionic/angular';
 import { ActivatedRoute, Router } from '@angular/router';
-import { User } from '../interfaces/user';
 import { LoginService } from '../services/login.service';
 
 @Component({
@@ -31,6 +30,7 @@ export class LoginPage {
             })
             .subscribe({
                 next : (res) => {
+                    localStorage.setItem('token', res.access || "ERROR")
                     loading.message = "Sesión iniciada"
                     loading.dismiss()
                     this.router.navigate(['/PagInicio']);

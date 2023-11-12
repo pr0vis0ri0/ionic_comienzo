@@ -1,0 +1,226 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <!-- <div class="segment-container">
+      <ion-segment value="default">
+        <ion-segment-button value="default">
+          <ion-label>Propiedades</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="segment">
+          <ion-label>Visitas</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+    </div> -->
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <!-- <ion-item>
+      <ion-label>
+        <ion-button style="display: flex; justify-content: center;">
+          <ion-icon name="duplicate-outline" style="margin-right: 15px;"></ion-icon>
+          Registrar Perrito
+        </ion-button>
+      </ion-label>
+    </ion-item> -->
+  
+    <!-- <ion-grid class="ion-padding-horizontal">
+      <ion-row>
+        <ion-col size="1"><strong>ID</strong></ion-col>
+        <ion-col><strong>Nombre</strong></ion-col>
+        <ion-col><strong>Edad</strong></ion-col>
+        <ion-col><strong>Raza</strong></ion-col>
+        <ion-col size="3"><strong>Acción</strong></ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="1"></ion-col>
+        <ion-col></ion-col>
+        <ion-col></ion-col>
+        <ion-col></ion-col>
+        <ion-col size="3" style="display: flex; justify-content: space-between;">
+          <ion-icon name="eye" color="primary" size="small" style="margin-right: 5px;">
+            <ion-button></ion-button>
+          </ion-icon>
+          <ion-icon name="create" color="tertiary" size="small" style="margin-right: 5px;">
+            <ion-button></ion-button>
+          </ion-icon>
+          <ion-icon name="trash" color="danger" size="small">
+            <ion-button></ion-button>
+          </ion-icon>
+        </ion-col>
+      </ion-row>
+    </ion-grid> -->
+    <ion-card>
+      <ion-card-content style="display: flex; justify-content: end;">
+        <ion-button (click)="showDialog()" fill="clear" shape="round">
+          <ion-icon name="duplicate-outline" color="primary" size="large"></ion-icon>
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+    <ion-card>
+      <ion-card-header color="success">
+        <ion-card-subtitle style="color: white;">Propiedades pendientes de aprobación</ion-card-subtitle>
+      </ion-card-header>
+      <p-table [value]="propiedades" [tableStyle]="{ 'min-width': '50rem', 'font-family': 'Inter var'}">
+        <ng-template pTemplate="header">
+            <tr>
+                <th style="padding: 15px;">ID</th>
+                <th style="padding: 15px;">Tipo</th>
+                <th style="padding: 15px;">Modalidad</th>
+                <th style="padding: 15px;">Valor Propiedad</th>
+                <th style="padding: 15px;">Comuna</th>
+                <th style="padding: 15px;">Acción</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-propiedades>
+            <tr>
+                <td style="padding: 10px;">A</td>
+                <td style="padding: 10px;">A</td>
+                <td style="padding: 10px;">A</td>
+                <td style="padding: 10px;">A</td>
+                <td style="padding: 10px;">A</td>
+                <td style="padding: 10px;" style="display:flex; align-items: center;">
+                  <ion-button (click)="showDialog()" size="small" fill="clear" shape="round">
+                    <ion-icon name="eye-outline" color="primary" size="small"></ion-icon>
+                  </ion-button>
+                  <ion-button (click)="showDialog()" fill="clear" shape="round">
+                    <ion-icon name="create-outline" color="primary" size="small"></ion-icon>
+                  </ion-button>
+                  <ion-button (click)="showDialog()" fill="clear" shape="round">
+                    <ion-icon name="trash-outline" color="danger" size="small"></ion-icon>
+                  </ion-button>
+                </td>
+            </tr>
+        </ng-template>
+      </p-table>
+    </ion-card>
+
+    <ion-card>
+      <ion-card-header color="primary">
+        <ion-card-subtitle style="color: white;">Base de propiedades</ion-card-subtitle>
+      </ion-card-header>
+      <p-table [value]="propiedades" [tableStyle]="{ 'min-width': '50rem' }">
+        <ng-template pTemplate="header">
+            <tr>
+                <th style="padding: 15px;">ID</th>
+                <th style="padding: 15px;">Tipo</th>
+                <th style="padding: 15px;">Modalidad</th>
+                <th style="padding: 15px;">Valor Propiedad</th>
+                <th style="padding: 15px;">Comuna</th>
+                <th style="padding: 15px;">Acción</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-propiedades>
+            <tr>
+                <td style="padding: 10px;">A</td>
+                <td style="padding: 10px;">A</td>
+                <td style="padding: 10px;">A</td>
+                <td style="padding: 10px;">A</td>
+                <td style="padding: 10px;">A</td>
+                <td style="padding: 10px;">
+                  <ion-icon name="eye-outline" color="primary" size="small" style="margin-right: 5px;">
+                  </ion-icon>
+                  <ion-icon name="create-outline" color="primary" size="small" style="margin-right: 5px;">
+                    <ion-button></ion-button>
+                  </ion-icon>
+                  <ion-icon name="trash-outline" color="danger" size="small">
+                    <ion-button></ion-button>
+                  </ion-icon>
+                </td>
+            </tr>
+        </ng-template>
+      </p-table>
+    </ion-card>
+    
+    <div id="modal_registro" class="card flex justify-content-center">
+      <p-dialog header="Registro de Propiedad" [(visible)]="registro_propiedad" [modal]="true" [style]="{ width: '80vw', height: '80vh' }" [draggable]="false" [resizable]="false">
+        <p-tabView [(activeIndex)]="indexActivo">
+          <p-tabPanel header="Datos Base" style="padding: 0px;">
+            <ion-item>
+              <ion-label position="floating">ID</ion-label>
+              <ion-input type="text"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Nombre</ion-label>
+              <ion-input type="text"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Edad</ion-label>
+              <ion-input type="number"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Raza</ion-label>
+              <ion-input type="text"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Descripción</ion-label>
+              <ion-input type="text"></ion-input>
+            </ion-item>
+          </p-tabPanel>
+        </p-tabView>
+          <ion-item class="ion-padding-horizontal">
+            <ion-label position="floating">ID</ion-label>
+            <ion-input type="text"></ion-input>
+          </ion-item>
+          <ion-item class="ion-padding-horizontal">
+            <ion-label position="floating">Nombre</ion-label>
+            <ion-input type="text"></ion-input>
+          </ion-item>
+          <ion-item class="ion-padding-horizontal">
+            <ion-label position="floating">Edad</ion-label>
+            <ion-input type="number"></ion-input>
+          </ion-item>
+          <ion-item class="ion-padding-horizontal">
+            <ion-label position="floating">Raza</ion-label>
+            <ion-input type="text"></ion-input>
+          </ion-item>
+          <ion-item class="ion-padding-horizontal">
+            <ion-label position="floating">Descripción</ion-label>
+            <ion-input type="text"></ion-input>
+          </ion-item>
+      </p-dialog>
+    </div>
+
+
+    <!-- <ion-button id="open-modal" expand="block">Abrir Modal</ion-button>
+    <ion-modal #miModal trigger="open-modal" (willDismiss)="onWillDismiss($event)">
+      <ng-template>
+        <ion-header>
+          <ion-toolbar>
+            <ion-buttons slot="start">
+              <ion-button (click)="cancel()">Cancel</ion-button>
+            </ion-buttons>
+            <ion-title>Prueba Modal</ion-title>
+            <ion-buttons slot="end">
+              <ion-button (click)="confirm()" [strong]="true">Confirm</ion-button>
+            </ion-buttons>
+          </ion-toolbar>
+        </ion-header>
+        <ion-content class="ion-padding">
+          Haz los inputs para perrito
+          <ion-item class="ion-padding-horizontal">
+            <ion-label position="floating">ID</ion-label>
+            <ion-input type="text"></ion-input>
+          </ion-item>
+          <ion-item class="ion-padding-horizontal">
+            <ion-label position="floating">Nombre</ion-label>
+            <ion-input type="text"></ion-input>
+          </ion-item>
+          <ion-item class="ion-padding-horizontal">
+            <ion-label position="floating">Edad</ion-label>
+            <ion-input type="number"></ion-input>
+          </ion-item>
+          <ion-item class="ion-padding-horizontal">
+            <ion-label position="floating">Raza</ion-label>
+            <ion-input type="text"></ion-input>
+          </ion-item>
+          <ion-item class="ion-padding-horizontal">
+            <ion-label position="floating">Descripción</ion-label>
+            <ion-input type="text"></ion-input>
+          </ion-item>
+        </ion-content>
+      </ng-template>
+    </ion-modal> -->
+</ion-content>

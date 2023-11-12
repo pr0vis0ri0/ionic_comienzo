@@ -23,14 +23,6 @@ const routes: Routes = [
     path: 'detalle_propiedad/:id',
     loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
   },
-  {
-    path: 'PagInicio',
-    loadChildren: () => import('./PagInicio/PagInicio.module').then( m => m.PagInicioPageModule)
-  },  {
-    path: 'usu-reg-propiedades',
-    loadChildren: () => import('./usu-reg-propiedades/usu-reg-propiedades.module').then( m => m.UsuRegPropiedadesPageModule)
-  },
-
   // {
   //   path: 'cliente/listar',
   //   loadChildren: () => import('./cliente/cliente.listar/cliente.listar.module').then( m => m.ClienteListarPageModule)
