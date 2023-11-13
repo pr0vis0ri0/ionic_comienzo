@@ -11,6 +11,7 @@ import { jwtDecode } from 'jwt-decode'
 })
 export class VistaUsuarioPage implements OnInit {
   propiedades: Propiedad[];
+  propiedades_pendientes : Propiedad[];
   registro_propiedad: boolean = false; // Booleano que inicializa el modal de registro de propiedad de PrimeNG
   indexActivo: number = 0;
   idRegionSeleccionado : number = 0;
@@ -23,7 +24,7 @@ export class VistaUsuarioPage implements OnInit {
     es_arriendo: false,
     es_venta: false,
     id_tipo_propiedad: 0,
-    id_comuna: this.idComunaSeleccionada,
+    id_comuna: 0,
     metros_totales: 0,
     metros_utiles: 0,
     cant_dormitorios: 0,
@@ -40,9 +41,10 @@ export class VistaUsuarioPage implements OnInit {
     ) { }
 
   ngOnInit() {
+    this.propiedadesPendientes()
     this.buscarPropiedadesEjemplo()
     this.buscarRegiones()
-    console.log(this.idUsuarioDecode())
+    console.log(this.propiedadesPendientes())
   }
   
   async buscarPropiedadesEjemplo() {
@@ -82,6 +84,10 @@ export class VistaUsuarioPage implements OnInit {
     })
   }
 
+  cambioComuna() {
+    this.reg_propiedad.id_comuna = this.idComunaSeleccionada;
+  }
+
   showDialog() {
     this.registro_propiedad = true;
   }
@@ -103,6 +109,15 @@ export class VistaUsuarioPage implements OnInit {
         console.log('Completado')
       }
     })
+  }
+
+  async propiedadesPendientes() {
+    this.api.devolverPropiedadesPendientesUsuario(this.idUsuarioDecode(), localStorage.getItem('token') as string)
+      .subscribe({
+        next : (data) => {
+          this.propiedades_pendientes = data;
+        }
+      })
   }
 
 
