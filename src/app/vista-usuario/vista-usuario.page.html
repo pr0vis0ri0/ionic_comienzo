@@ -140,11 +140,14 @@
           <p-tabPanel header="Datos Base">
             <ion-item class="ion-no-padding">
               <ion-label position="floating">Valor Propiedad</ion-label>
-              <ion-input type="text"></ion-input>
+              <ion-input [(ngModel)]="reg_propiedad.valor_propiedad" type="text"></ion-input>
             </ion-item>
             <ion-item class="ion-no-padding">
               <ion-label position="floating">Tipo de Propiedad</ion-label>
-              <ion-input type="text"></ion-input>
+              <ion-select [(ngModel)]="reg_propiedad.id_tipo_propiedad" placeholder="Escoge tipo de propiedad">
+                <ion-select-option [value]="1">Departamento</ion-select-option>
+                <ion-select-option [value]="2">Casa</ion-select-option>
+              </ion-select>
             </ion-item>
             <ion-item class="ion-no-padding">
               <ion-label position="floating">Región:</ion-label>
@@ -160,39 +163,39 @@
             </ion-item>
             <div class="checkboxes">
               <ion-item class="ion-padding-top ion-no-padding" lines="none">
-                <ion-checkbox (ionChange)="checkTipo()">¿Es arriendo?</ion-checkbox>
+                <ion-checkbox [(ngModel)]="reg_propiedad.es_arriendo" (ionChange)="checkTipo()">¿Es arriendo?</ion-checkbox>
               </ion-item>
               <ion-item class="ion-no-padding" lines="none">
-                <ion-checkbox (ionChange)="checkTipo()">¿Es venta?</ion-checkbox>
+                <ion-checkbox [(ngModel)]="reg_propiedad.es_venta" (ionChange)="checkTipo()">¿Es venta?</ion-checkbox>
               </ion-item>
             </div>
           </p-tabPanel>
           <p-tabPanel header="Características">
             <ion-item class="ion-no-padding">
               <ion-label position="floating">Metros Totales</ion-label>
-              <ion-input type="text"></ion-input>
+              <ion-input [(ngModel)]="reg_propiedad.metros_totales" type="text"></ion-input>
             </ion-item>
             <ion-item class="ion-no-padding">
               <ion-label position="floating">Metros Útiles</ion-label>
-              <ion-input type="text"></ion-input>
+              <ion-input [(ngModel)]="reg_propiedad.metros_utiles" type="text"></ion-input>
             </ion-item>
             <ion-item class="ion-no-padding">
               <ion-label position="floating">Cantidad de Dormitorios</ion-label>
-              <ion-input type="text"></ion-input>
+              <ion-input [(ngModel)]="reg_propiedad.cant_dormitorios" type="text"></ion-input>
             </ion-item>
             <ion-item class="ion-no-padding">
               <ion-label position="floating">Cantidad de Baños</ion-label>
-              <ion-input type="text"></ion-input>
+              <ion-input [(ngModel)]="reg_propiedad.cant_banos" type="text"></ion-input>
             </ion-item>
             <div class="checkboxes">
               <ion-item class="ion-padding-top ion-no-padding" lines="none">
-                <ion-checkbox>¿Permite mascotas?</ion-checkbox>
+                <ion-checkbox [(ngModel)]="reg_propiedad.permite_mascotas">¿Permite mascotas?</ion-checkbox>
               </ion-item>
               <ion-item class="ion-no-padding" lines="none">
-                <ion-checkbox>¿Tiene estacionamiento?</ion-checkbox>
+                <ion-checkbox [(ngModel)]="reg_propiedad.tiene_bodega">¿Tiene bodega?</ion-checkbox>
               </ion-item>
               <ion-item class="ion-no-padding" lines="none">
-                <ion-checkbox>¿Tiene bodega?</ion-checkbox>
+                <ion-checkbox [(ngModel)]="reg_propiedad.tiene_estacionamiento">¿Tiene estacionamiento?</ion-checkbox>
               </ion-item>
             </div>
             <div>

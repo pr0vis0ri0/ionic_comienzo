@@ -23,7 +23,7 @@ export class VistaUsuarioPage implements OnInit {
     es_arriendo: false,
     es_venta: false,
     id_tipo_propiedad: 0,
-    id_comuna: 0,
+    id_comuna: this.idComunaSeleccionada,
     metros_totales: 0,
     metros_utiles: 0,
     cant_dormitorios: 0,
@@ -91,7 +91,18 @@ export class VistaUsuarioPage implements OnInit {
   }
 
   registrarPropiedad() {
-    
+    console.log(this.reg_propiedad)
+    this.api.registrarPropiedadUsuario(this.reg_propiedad, localStorage.getItem('token') as string).subscribe({
+      next : (data) => {
+        console.log(data)
+      },
+      error : (error) => {
+        console.log(error)
+      },
+      complete : () => {
+        console.log('Completado')
+      }
+    })
   }
 
 

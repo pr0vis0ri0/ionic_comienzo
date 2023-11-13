@@ -1,5 +1,5 @@
 import { Injectable, OnInit } from '@angular/core';
-import { Propiedad, DetallePropiedad } from '../interfaces/interface';
+import { Propiedad, DetallePropiedad, RegistroPropiedad } from '../interfaces/interface';
 import { Observable, of, throwError } from 'rxjs';
 import { catchError, tap, map } from 'rxjs/operators';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http'
@@ -83,5 +83,15 @@ export class PropiedadesService implements OnInit {
           tap((propiedad: Propiedad) => console.log(propiedad)),
           catchError(this.handleError<Propiedad>('ERROR: Propiedades Filtradas'))
         );
+    }
+
+    registrarPropiedadUsuario(propiedad : RegistroPropiedad, auth_token : string) {
+      const httpOptionsToken = { headers : new HttpHeaders({'Content-Type' : 'application/json', 'Authorization' : `Bearer ${auth_token}`} )}
+      const url = 'http://localhost:9000/registro_propiedad/'
+      return this.http.post<RegistroPropiedad>(url, propiedad, httpOptionsToken)
+        .pipe(
+          tap((propiedad: RegistroPropiedad) => console.log(propiedad)),
+          catchError(this.handleError<RegistroPropiedad>('ERROR: Registro Propiedad'))
+        )
     }
 }
