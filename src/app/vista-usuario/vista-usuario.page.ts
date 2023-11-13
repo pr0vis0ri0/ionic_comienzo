@@ -1,9 +1,8 @@
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { LoadingController } from '@ionic/angular';
-import { Router } from '@angular/router';
-import { OverlayEventDetail } from '@ionic/core/components';
 import { PropiedadesService } from '../services/propiedades.service';
-import { Propiedad } from '../interfaces/interface';
+import { Propiedad, RegistroPropiedad, JwtPayload } from '../interfaces/interface';
+import { jwtDecode } from 'jwt-decode'
 
 @Component({
   selector: 'app-vista-usuario',
@@ -18,6 +17,21 @@ export class VistaUsuarioPage implements OnInit {
   idComunaSeleccionada : number = 0;
   regiones: any[] = [];
   comunas: any[] = [];
+  reg_propiedad : RegistroPropiedad = {
+    id_usuario: this.idUsuarioDecode(),
+    valor_propiedad: 0,
+    es_arriendo: false,
+    es_venta: false,
+    id_tipo_propiedad: 0,
+    id_comuna: 0,
+    metros_totales: 0,
+    metros_utiles: 0,
+    cant_dormitorios: 0,
+    cant_banos: 0,
+    permite_mascotas: false,
+    tiene_bodega: false,
+    tiene_estacionamiento: false
+  }
 
   constructor(
     // private loading: LoadingController, 
@@ -28,8 +42,9 @@ export class VistaUsuarioPage implements OnInit {
   ngOnInit() {
     this.buscarPropiedadesEjemplo()
     this.buscarRegiones()
+    console.log(this.idUsuarioDecode())
   }
-
+  
   async buscarPropiedadesEjemplo() {
     this.api.devolverListaPropiedades()
       .subscribe({
@@ -39,12 +54,24 @@ export class VistaUsuarioPage implements OnInit {
       })
   }
 
-  buscarRegiones() {
+  async buscarRegiones() {
     this.api.devolerRegiones().subscribe({
       next : (region) => {
         this.regiones = region;
       }
     })
+  }
+
+  devolverToken() : string | null {
+    return localStorage.getItem('token');
+  }
+
+  idUsuarioDecode() : any {
+    const token = this.devolverToken();
+    let id_user : number | null;
+    const decoded = jwtDecode<JwtPayload>(token as string);
+    id_user = decoded.id_usuario as number;
+    return id_user
   }
 
   buscarComunas() {
@@ -63,6 +90,9 @@ export class VistaUsuarioPage implements OnInit {
     
   }
 
+  registrarPropiedad() {
+    
+  }
 
 
   // @ViewChild('miModal', { static: false }) modal: IonModal;

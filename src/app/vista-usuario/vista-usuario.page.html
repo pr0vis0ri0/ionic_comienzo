@@ -158,10 +158,6 @@
                 <ion-select-option *ngFor="let comuna of comunas" [value]="comuna.id_comuna">{{comuna.nombre_comuna}}</ion-select-option>
               </ion-select>
             </ion-item>
-            <ion-item class="ion-no-padding">
-              <ion-label position="floating">Descripción</ion-label>
-              <ion-input type="text"></ion-input> 
-            </ion-item>
             <div class="checkboxes">
               <ion-item class="ion-padding-top ion-no-padding" lines="none">
                 <ion-checkbox (ionChange)="checkTipo()">¿Es arriendo?</ion-checkbox>
@@ -172,7 +168,38 @@
             </div>
           </p-tabPanel>
           <p-tabPanel header="Características">
-            <p>Hola chavales</p>
+            <ion-item class="ion-no-padding">
+              <ion-label position="floating">Metros Totales</ion-label>
+              <ion-input type="text"></ion-input>
+            </ion-item>
+            <ion-item class="ion-no-padding">
+              <ion-label position="floating">Metros Útiles</ion-label>
+              <ion-input type="text"></ion-input>
+            </ion-item>
+            <ion-item class="ion-no-padding">
+              <ion-label position="floating">Cantidad de Dormitorios</ion-label>
+              <ion-input type="text"></ion-input>
+            </ion-item>
+            <ion-item class="ion-no-padding">
+              <ion-label position="floating">Cantidad de Baños</ion-label>
+              <ion-input type="text"></ion-input>
+            </ion-item>
+            <div class="checkboxes">
+              <ion-item class="ion-padding-top ion-no-padding" lines="none">
+                <ion-checkbox>¿Permite mascotas?</ion-checkbox>
+              </ion-item>
+              <ion-item class="ion-no-padding" lines="none">
+                <ion-checkbox>¿Tiene estacionamiento?</ion-checkbox>
+              </ion-item>
+              <ion-item class="ion-no-padding" lines="none">
+                <ion-checkbox>¿Tiene bodega?</ion-checkbox>
+              </ion-item>
+            </div>
+            <div>
+              <ion-button (click)="registrarPropiedad()" expand="block" shape="round">
+                Grabar
+              </ion-button>
+            </div>
           </p-tabPanel>
         </p-tabView>
       </p-dialog>
