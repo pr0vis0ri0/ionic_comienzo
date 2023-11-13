@@ -3,55 +3,10 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <!-- <div class="segment-container">
-      <ion-segment value="default">
-        <ion-segment-button value="default">
-          <ion-label>Propiedades</ion-label>
-        </ion-segment-button>
-        <ion-segment-button value="segment">
-          <ion-label>Visitas</ion-label>
-        </ion-segment-button>
-      </ion-segment>
-    </div> -->
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-    <!-- <ion-item>
-      <ion-label>
-        <ion-button style="display: flex; justify-content: center;">
-          <ion-icon name="duplicate-outline" style="margin-right: 15px;"></ion-icon>
-          Registrar Perrito
-        </ion-button>
-      </ion-label>
-    </ion-item> -->
-  
-    <!-- <ion-grid class="ion-padding-horizontal">
-      <ion-row>
-        <ion-col size="1"><strong>ID</strong></ion-col>
-        <ion-col><strong>Nombre</strong></ion-col>
-        <ion-col><strong>Edad</strong></ion-col>
-        <ion-col><strong>Raza</strong></ion-col>
-        <ion-col size="3"><strong>Acción</strong></ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col size="1"></ion-col>
-        <ion-col></ion-col>
-        <ion-col></ion-col>
-        <ion-col></ion-col>
-        <ion-col size="3" style="display: flex; justify-content: space-between;">
-          <ion-icon name="eye" color="primary" size="small" style="margin-right: 5px;">
-            <ion-button></ion-button>
-          </ion-icon>
-          <ion-icon name="create" color="tertiary" size="small" style="margin-right: 5px;">
-            <ion-button></ion-button>
-          </ion-icon>
-          <ion-icon name="trash" color="danger" size="small">
-            <ion-button></ion-button>
-          </ion-icon>
-        </ion-col>
-      </ion-row>
-    </ion-grid> -->
     <ion-card>
       <ion-card-content style="display: flex; justify-content: end;">
         <ion-button (click)="showDialog()" fill="clear" shape="round">
@@ -59,11 +14,12 @@
         </ion-button>
       </ion-card-content>
     </ion-card>
+
     <ion-card>
-      <ion-card-header color="success">
+      <ion-card-header color="warning">
         <ion-card-subtitle style="color: white;">Propiedades pendientes de aprobación</ion-card-subtitle>
       </ion-card-header>
-      <p-table [value]="propiedades" [tableStyle]="{ 'min-width': '50rem', 'font-family': 'Inter var'}">
+      <p-table [value]="propiedades_pendientes" [tableStyle]="{ 'min-width': '50rem'}">
         <ng-template pTemplate="header">
             <tr>
                 <th style="padding: 15px;">ID</th>
@@ -74,23 +30,23 @@
                 <th style="padding: 15px;">Acción</th>
             </tr>
         </ng-template>
-        <ng-template pTemplate="body" let-propiedades>
+        <ng-template pTemplate="body" let-propiedades_pendientes>
             <tr>
-                <td style="padding: 10px;">A</td>
-                <td style="padding: 10px;">A</td>
-                <td style="padding: 10px;">A</td>
-                <td style="padding: 10px;">A</td>
-                <td style="padding: 10px;">A</td>
-                <td style="padding: 10px;" style="display:flex; align-items: center;">
+                <td style="padding: 12px;">{{propiedades_pendientes.id_propiedad}}</td>
+                <td style="padding: 12px;">{{propiedades_pendientes.nombre_tipo_propiedad}}</td>
+                <td style="padding: 12px;">{{propiedades_pendientes.es_arriendo ? 'Arriendo' : 'Venta'}}</td>
+                <td style="padding: 12px;">{{propiedades_pendientes.valor_propiedad}}</td>
+                <td style="padding: 12px;">{{propiedades_pendientes.nombre_comuna}}</td>
+                <td style="padding: 12px;">
                   <ion-button (click)="showDialog()" size="small" fill="clear" shape="round">
                     <ion-icon name="eye-outline" color="primary" size="small"></ion-icon>
                   </ion-button>
-                  <ion-button (click)="showDialog()" fill="clear" shape="round">
+                  <!-- <ion-button (click)="showDialog()" fill="clear" shape="round">
                     <ion-icon name="create-outline" color="primary" size="small"></ion-icon>
                   </ion-button>
                   <ion-button (click)="showDialog()" fill="clear" shape="round">
                     <ion-icon name="trash-outline" color="danger" size="small"></ion-icon>
-                  </ion-button>
+                  </ion-button> -->
                 </td>
             </tr>
         </ng-template>
@@ -101,7 +57,7 @@
       <ion-card-header color="primary">
         <ion-card-subtitle style="color: white;">Base de propiedades</ion-card-subtitle>
       </ion-card-header>
-      <p-table [value]="propiedades" [tableStyle]="{ 'min-width': '50rem' }">
+      <p-table [value]="propiedades_pendientes" [tableStyle]="{ 'min-width': '50rem'}">
         <ng-template pTemplate="header">
             <tr>
                 <th style="padding: 15px;">ID</th>
@@ -112,22 +68,23 @@
                 <th style="padding: 15px;">Acción</th>
             </tr>
         </ng-template>
-        <ng-template pTemplate="body" let-propiedades>
+        <ng-template pTemplate="body" let-propiedades_pendientes>
             <tr>
-                <td style="padding: 10px;">A</td>
-                <td style="padding: 10px;">A</td>
-                <td style="padding: 10px;">A</td>
-                <td style="padding: 10px;">A</td>
-                <td style="padding: 10px;">A</td>
-                <td style="padding: 10px;">
-                  <ion-icon name="eye-outline" color="primary" size="small" style="margin-right: 5px;">
-                  </ion-icon>
-                  <ion-icon name="create-outline" color="primary" size="small" style="margin-right: 5px;">
-                    <ion-button></ion-button>
-                  </ion-icon>
-                  <ion-icon name="trash-outline" color="danger" size="small">
-                    <ion-button></ion-button>
-                  </ion-icon>
+                <td style="padding: 12px;">{{propiedades_pendientes.id_propiedad}}</td>
+                <td style="padding: 12px;">{{propiedades_pendientes.nombre_tipo_propiedad}}</td>
+                <td style="padding: 12px;">{{propiedades_pendientes.es_arriendo ? 'Arriendo' : 'Venta'}}</td>
+                <td style="padding: 12px;">{{propiedades_pendientes.valor_propiedad}}</td>
+                <td style="padding: 12px;">{{propiedades_pendientes.nombre_comuna}}</td>
+                <td style="padding: 12px;">
+                  <ion-button (click)="showDialog()" size="small" fill="clear" shape="round">
+                    <ion-icon name="eye-outline" color="primary" size="small"></ion-icon>
+                  </ion-button>
+                  <!-- <ion-button (click)="showDialog()" fill="clear" shape="round">
+                    <ion-icon name="create-outline" color="primary" size="small"></ion-icon>
+                  </ion-button>
+                  <ion-button (click)="showDialog()" fill="clear" shape="round">
+                    <ion-icon name="trash-outline" color="danger" size="small"></ion-icon>
+                  </ion-button> -->
                 </td>
             </tr>
         </ng-template>
@@ -139,47 +96,83 @@
         <p-tabView [(activeIndex)]="indexActivo">
           <p-tabPanel header="Datos Base">
             <ion-item class="ion-no-padding">
-              <ion-label position="floating">Valor Propiedad</ion-label>
-              <ion-input type="text"></ion-input>
+              <ion-icon name="cash-outline" color="primary" item-left style="padding-right: 8px;"></ion-icon>
+              <ion-input [(ngModel)]="reg_propiedad.valor_propiedad" label="Valor Propiedad" label-placement="floating" type="number"></ion-input>
             </ion-item>
             <ion-item class="ion-no-padding">
-              <ion-label position="floating">Tipo de Propiedad</ion-label>
-              <ion-input type="text"></ion-input>
+              <ion-icon name="business-outline" color="primary" item-left style="padding-right: 8px;"></ion-icon>
+              <ion-select [(ngModel)]="reg_propiedad.id_tipo_propiedad" label="Tipo de Propiedad" label-placement="floating" placeholder="Escoge tipo de propiedad">
+                <ion-select-option [value]="1">Departamento</ion-select-option>
+                <ion-select-option [value]="2">Casa</ion-select-option>
+              </ion-select>
             </ion-item>
             <ion-item class="ion-no-padding">
-              <ion-label position="floating">Región:</ion-label>
-              <ion-select [(ngModel)]="idRegionSeleccionado" (ionChange)="buscarComunas()" placeholder="Escoge Región">
+              <ion-icon name="compass-outline" color="primary" item-left style="padding-right: 8px;"></ion-icon>
+              <ion-select [(ngModel)]="idRegionSeleccionado" (ionChange)="buscarComunas()" label="Región" label-placement="floating" placeholder="Escoge Región">
                 <ion-select-option *ngFor="let region of regiones" [value]="region.id_region">{{region.nombre_region}}</ion-select-option>
               </ion-select>
             </ion-item>
             <ion-item class="ion-no-padding">
-              <ion-label position="floating">Comuna:</ion-label>
-              <ion-select [(ngModel)]="idComunaSeleccionada" placeholder="Escoge Comuna">
+              <ion-icon name="navigate-outline" color="primary" item-left style="padding-right: 8px;"></ion-icon>
+              <ion-select [(ngModel)]="idComunaSeleccionada" (ionChange)="cambioComuna()" label="Comuna" label-placement="floating" placeholder="Escoge Comuna">
                 <ion-select-option *ngFor="let comuna of comunas" [value]="comuna.id_comuna">{{comuna.nombre_comuna}}</ion-select-option>
               </ion-select>
             </ion-item>
-            <ion-item class="ion-no-padding">
-              <ion-label position="floating">Descripción</ion-label>
-              <ion-input type="text"></ion-input> 
-            </ion-item>
             <div class="checkboxes">
               <ion-item class="ion-padding-top ion-no-padding" lines="none">
-                <ion-checkbox (ionChange)="checkTipo()">¿Es arriendo?</ion-checkbox>
+                <ion-icon name="pricetag-outline" color="primary" item-left style="padding-right: 8px;"></ion-icon>
+                <ion-checkbox [(ngModel)]="reg_propiedad.es_arriendo" (ionChange)="checkTipo()">¿Es arriendo?</ion-checkbox>
               </ion-item>
               <ion-item class="ion-no-padding" lines="none">
-                <ion-checkbox (ionChange)="checkTipo()">¿Es venta?</ion-checkbox>
+                <ion-icon name="pricetag-outline" color="primary" item-left style="padding-right: 8px;"></ion-icon>
+                <ion-checkbox [(ngModel)]="reg_propiedad.es_venta" (ionChange)="checkTipo()">¿Es venta?</ion-checkbox>
               </ion-item>
             </div>
           </p-tabPanel>
           <p-tabPanel header="Características">
-            <p>Hola chavales</p>
+            <ion-item class="ion-no-padding">
+              <ion-icon name="square-outline" color="primary" item-left style="padding-right: 8px;"></ion-icon>
+              <ion-input [(ngModel)]="reg_propiedad.metros_totales" label="Metros Totales" label-placement="floating" type="number"></ion-input>
+            </ion-item>
+            <ion-item class="ion-no-padding">
+              <ion-icon name="square-outline" color="primary" item-left style="padding-right: 8px;"></ion-icon>
+              <ion-input [(ngModel)]="reg_propiedad.metros_utiles" label="Metros Útiles" label-placement="floating" type="number"></ion-input>
+            </ion-item>
+            <ion-item class="ion-no-padding">
+              <ion-icon name="bed-outline" color="primary" item-left style="padding-right: 8px;"></ion-icon>
+              <ion-input [(ngModel)]="reg_propiedad.cant_dormitorios" label="Cantidad de Dormitorios" label-placement="floating" type="number"></ion-input>
+            </ion-item>
+            <ion-item class="ion-no-padding">
+              <ion-icon name="water-outline" color="primary" item-left style="padding-right: 8px;"></ion-icon>
+              <ion-input [(ngModel)]="reg_propiedad.cant_banos" label="Cantidad de Baños" label-placement="floating" type="number"></ion-input>
+            </ion-item>
+            <div class="checkboxes">
+              <ion-item class="ion-padding-top ion-no-padding" lines="none">
+                <ion-icon name="paw-outline" color="primary" item-left style="padding-right: 8px;"></ion-icon>
+                <ion-checkbox [(ngModel)]="reg_propiedad.permite_mascotas">¿Permite mascotas?</ion-checkbox>
+              </ion-item>
+              <ion-item class="ion-no-padding" lines="none">
+                <ion-icon name="cube-outline" color="primary" item-left style="padding-right: 8px;"></ion-icon>
+                <ion-checkbox [(ngModel)]="reg_propiedad.tiene_bodega">¿Tiene bodega?</ion-checkbox>
+              </ion-item>
+              <ion-item class="ion-no-padding" lines="none">
+                <ion-icon name="car-outline" color="primary" item-left style="padding-right: 8px;"></ion-icon>
+                <ion-checkbox [(ngModel)]="reg_propiedad.tiene_estacionamiento">¿Tiene estacionamiento?</ion-checkbox>
+              </ion-item>
+            </div>
+            <div class="ion-padding-top">
+              <ion-button (click)="registrarPropiedad()" expand="block" shape="round">
+                Grabar
+              </ion-button>
+            </div>
           </p-tabPanel>
         </p-tabView>
       </p-dialog>
     </div>
+</ion-content>
 
 
-    <!-- <ion-button id="open-modal" expand="block">Abrir Modal</ion-button>
+<!-- <ion-button id="open-modal" expand="block">Abrir Modal</ion-button>
     <ion-modal #miModal trigger="open-modal" (willDismiss)="onWillDismiss($event)">
       <ng-template>
         <ion-header>
@@ -218,4 +211,39 @@
         </ion-content>
       </ng-template>
     </ion-modal> -->
-</ion-content>
+
+<!-- <ion-item>
+      <ion-label>
+        <ion-button style="display: flex; justify-content: center;">
+          <ion-icon name="duplicate-outline" style="margin-right: 15px;"></ion-icon>
+          Registrar Perrito
+        </ion-button>
+      </ion-label>
+    </ion-item> -->
+  
+    <!-- <ion-grid class="ion-padding-horizontal">
+      <ion-row>
+        <ion-col size="1"><strong>ID</strong></ion-col>
+        <ion-col><strong>Nombre</strong></ion-col>
+        <ion-col><strong>Edad</strong></ion-col>
+        <ion-col><strong>Raza</strong></ion-col>
+        <ion-col size="3"><strong>Acción</strong></ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="1"></ion-col>
+        <ion-col></ion-col>
+        <ion-col></ion-col>
+        <ion-col></ion-col>
+        <ion-col size="3" style="display: flex; justify-content: space-between;">
+          <ion-icon name="eye" color="primary" size="small" style="margin-right: 5px;">
+            <ion-button></ion-button>
+          </ion-icon>
+          <ion-icon name="create" color="tertiary" size="small" style="margin-right: 5px;">
+            <ion-button></ion-button>
+          </ion-icon>
+          <ion-icon name="trash" color="danger" size="small">
+            <ion-button></ion-button>
+          </ion-icon>
+        </ion-col>
+      </ion-row>
+    </ion-grid> -->

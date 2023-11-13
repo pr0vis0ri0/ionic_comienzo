@@ -36,3 +36,21 @@ export interface JwtPayload {
     token_type: string;
     user_id: number;
 }
+
+// Tuve que hacer una interface para sí sola
+// ya que da error :(
+export interface RegistroPropiedad {
+    id_usuario?: number;
+    valor_propiedad: number;
+    es_arriendo: boolean;
+    es_venta: boolean;
+    id_tipo_propiedad: number;
+    id_comuna: number;
+    metros_totales: number;
+    metros_utiles: number;
+    cant_dormitorios: number;
+    cant_banos: number;
+    permite_mascotas: boolean;
+    tiene_bodega: boolean;
+    tiene_estacionamiento: boolean;
+}
