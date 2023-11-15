@@ -51,7 +51,7 @@ export class PropiedadesService implements OnInit {
       const ruta_regiones = 'http://localhost:9000/region/'
       return this.http.get<any>(ruta_regiones)
         .pipe(
-          tap((region: any) => console.log(region)),
+          // tap((region: any) => console.log(region)),
           catchError(this.handleError<any>('ERROR: Regiones'))
         );
     }
@@ -100,7 +100,7 @@ export class PropiedadesService implements OnInit {
       const url = 'http://localhost:9000/propiedades_pendientes/'
       return this.http.post<Propiedad[]>(url, {'id_usuario': id_usuario}, httpOptionsToken)
       .pipe(
-        tap((propiedad: Propiedad[]) => console.log(propiedad)),
+        // tap((propiedad: Propiedad[]) => console.log(propiedad)),
         catchError(this.handleError<Propiedad[]>('ERROR: Registro Propiedad'))
       )
     }

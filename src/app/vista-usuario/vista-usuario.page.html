@@ -9,7 +9,7 @@
 <ion-content>
     <ion-card>
       <ion-card-content style="display: flex; justify-content: end;">
-        <ion-button (click)="showDialog()" fill="clear" shape="round">
+        <ion-button (click)="modalRegistroPropiedad()" fill="clear" shape="round">
           <ion-icon name="duplicate-outline" color="primary" size="large"></ion-icon>
         </ion-button>
       </ion-card-content>
@@ -19,41 +19,51 @@
       <ion-card-header color="warning">
         <ion-card-subtitle style="color: white;">Propiedades pendientes de aprobación</ion-card-subtitle>
       </ion-card-header>
-      <p-table [value]="propiedades_pendientes" [tableStyle]="{ 'min-width': '50rem'}">
-        <ng-template pTemplate="header">
-            <tr>
-                <th style="padding: 15px;">ID</th>
-                <th style="padding: 15px;">Tipo</th>
-                <th style="padding: 15px;">Modalidad</th>
-                <th style="padding: 15px;">Valor Propiedad</th>
-                <th style="padding: 15px;">Comuna</th>
-                <th style="padding: 15px;">Acción</th>
-            </tr>
-        </ng-template>
-        <ng-template pTemplate="body" let-propiedades_pendientes>
-            <tr>
-                <td style="padding: 12px;">{{propiedades_pendientes.id_propiedad}}</td>
-                <td style="padding: 12px;">{{propiedades_pendientes.nombre_tipo_propiedad}}</td>
-                <td style="padding: 12px;">{{propiedades_pendientes.es_arriendo ? 'Arriendo' : 'Venta'}}</td>
-                <td style="padding: 12px;">{{propiedades_pendientes.valor_propiedad}}</td>
-                <td style="padding: 12px;">{{propiedades_pendientes.nombre_comuna}}</td>
-                <td style="padding: 12px;">
-                  <ion-button (click)="showDialog()" size="small" fill="clear" shape="round">
-                    <ion-icon name="eye-outline" color="primary" size="small"></ion-icon>
-                  </ion-button>
-                  <!-- <ion-button (click)="showDialog()" fill="clear" shape="round">
-                    <ion-icon name="create-outline" color="primary" size="small"></ion-icon>
-                  </ion-button>
-                  <ion-button (click)="showDialog()" fill="clear" shape="round">
-                    <ion-icon name="trash-outline" color="danger" size="small"></ion-icon>
-                  </ion-button> -->
-                </td>
-            </tr>
-        </ng-template>
-      </p-table>
+      <div *ngIf="estado_carga_pendientes">
+        <p-table [value]="propiedades_pendientes" [tableStyle]="{ 'min-width': '50rem'}">
+          <ng-template pTemplate="header">
+              <tr>
+                  <th style="padding: 15px;">ID</th>
+                  <th style="padding: 15px;">Tipo</th>
+                  <th style="padding: 15px;">Modalidad</th>
+                  <th style="padding: 15px;">Valor Propiedad</th>
+                  <th style="padding: 15px;">Comuna</th>
+                  <th style="padding: 15px;">Acción</th>
+              </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-item>
+              <tr>
+                  <td style="padding: 12px;">{{item.id_propiedad}}</td>
+                  <td style="padding: 12px;">{{item.nombre_tipo_propiedad}}</td>
+                  <td style="padding: 12px;">{{item.es_arriendo ? 'Arriendo' : 'Venta'}}</td>
+                  <td style="padding: 12px;">{{item.valor_propiedad}}</td>
+                  <td style="padding: 12px;">{{item.nombre_comuna}}</td>
+                  <td style="padding: 12px;">
+                    <ion-button (click)="modalVisualizacionPropiedad()" size="small" fill="clear" shape="round">
+                      <ion-icon name="eye-outline" color="primary" size="small"></ion-icon>
+                    </ion-button>
+                  </td>
+              </tr>
+          </ng-template>
+          <ng-template pTemplate="summary">
+            <div class="flex align-items-center justify-content-between">
+                En total hay {{propiedades_pendientes ? propiedades_pendientes.length : 0 }} {{propiedades_pendientes.length > 1 ? 'propiedades pendientes de aprobación.' : 'propiedad pendiente de aprobación.'}}
+            </div>
+          </ng-template>
+        </p-table>
+      </div>
+      <div *ngIf="!estado_carga_pendientes">
+        <p-table [tableStyle]="{ 'min-width': '50rem'}">
+          <ng-template pTemplate="summary">
+            <div class="flex align-items-center justify-content-between">
+                No se encontraron propiedades pendientes de aprobación.
+            </div>
+          </ng-template>
+        </p-table>
+      </div>
     </ion-card>
 
-    <ion-card>
+    <!-- <ion-card>
       <ion-card-header color="primary">
         <ion-card-subtitle style="color: white;">Base de propiedades</ion-card-subtitle>
       </ion-card-header>
@@ -79,17 +89,11 @@
                   <ion-button (click)="showDialog()" size="small" fill="clear" shape="round">
                     <ion-icon name="eye-outline" color="primary" size="small"></ion-icon>
                   </ion-button>
-                  <!-- <ion-button (click)="showDialog()" fill="clear" shape="round">
-                    <ion-icon name="create-outline" color="primary" size="small"></ion-icon>
-                  </ion-button>
-                  <ion-button (click)="showDialog()" fill="clear" shape="round">
-                    <ion-icon name="trash-outline" color="danger" size="small"></ion-icon>
-                  </ion-button> -->
                 </td>
             </tr>
         </ng-template>
       </p-table>
-    </ion-card>
+    </ion-card> -->
     
     <div id="modal_registro" class="card flex justify-content-center">
       <p-dialog header="Registro de Propiedad" [(visible)]="registro_propiedad" [modal]="true" [style]="{ width: '80vw', height: '80vh' }" [draggable]="false" [resizable]="false">
@@ -97,11 +101,11 @@
           <p-tabPanel header="Datos Base">
             <ion-item class="ion-no-padding">
               <ion-icon name="cash-outline" color="primary" item-left style="padding-right: 8px;"></ion-icon>
-              <ion-input [(ngModel)]="reg_propiedad.valor_propiedad" label="Valor Propiedad" label-placement="floating" type="number"></ion-input>
+              <ion-input [(ngModel)]="rp.valor_propiedad" label="Valor Propiedad" label-placement="floating" type="number"></ion-input>
             </ion-item>
             <ion-item class="ion-no-padding">
               <ion-icon name="business-outline" color="primary" item-left style="padding-right: 8px;"></ion-icon>
-              <ion-select [(ngModel)]="reg_propiedad.id_tipo_propiedad" label="Tipo de Propiedad" label-placement="floating" placeholder="Escoge tipo de propiedad">
+              <ion-select [(ngModel)]="rp.id_tipo_propiedad" label="Tipo de Propiedad" label-placement="floating" placeholder="Escoge tipo de propiedad">
                 <ion-select-option [value]="1">Departamento</ion-select-option>
                 <ion-select-option [value]="2">Casa</ion-select-option>
               </ion-select>
@@ -121,49 +125,116 @@
             <div class="checkboxes">
               <ion-item class="ion-padding-top ion-no-padding" lines="none">
                 <ion-icon name="pricetag-outline" color="primary" item-left style="padding-right: 8px;"></ion-icon>
-                <ion-checkbox [(ngModel)]="reg_propiedad.es_arriendo" (ionChange)="checkTipo()">¿Es arriendo?</ion-checkbox>
+                <ion-checkbox [(ngModel)]="rp.es_arriendo" (ionChange)="checkTipo()">¿Es arriendo?</ion-checkbox>
               </ion-item>
               <ion-item class="ion-no-padding" lines="none">
                 <ion-icon name="pricetag-outline" color="primary" item-left style="padding-right: 8px;"></ion-icon>
-                <ion-checkbox [(ngModel)]="reg_propiedad.es_venta" (ionChange)="checkTipo()">¿Es venta?</ion-checkbox>
+                <ion-checkbox [(ngModel)]="rp.es_venta" (ionChange)="checkTipo()">¿Es venta?</ion-checkbox>
               </ion-item>
             </div>
           </p-tabPanel>
           <p-tabPanel header="Características">
             <ion-item class="ion-no-padding">
               <ion-icon name="square-outline" color="primary" item-left style="padding-right: 8px;"></ion-icon>
-              <ion-input [(ngModel)]="reg_propiedad.metros_totales" label="Metros Totales" label-placement="floating" type="number"></ion-input>
+              <ion-input [(ngModel)]="rp.metros_totales" label="Metros Totales" label-placement="floating" type="number"></ion-input>
             </ion-item>
             <ion-item class="ion-no-padding">
               <ion-icon name="square-outline" color="primary" item-left style="padding-right: 8px;"></ion-icon>
-              <ion-input [(ngModel)]="reg_propiedad.metros_utiles" label="Metros Útiles" label-placement="floating" type="number"></ion-input>
+              <ion-input [(ngModel)]="rp.metros_utiles" label="Metros Útiles" label-placement="floating" type="number"></ion-input>
             </ion-item>
             <ion-item class="ion-no-padding">
               <ion-icon name="bed-outline" color="primary" item-left style="padding-right: 8px;"></ion-icon>
-              <ion-input [(ngModel)]="reg_propiedad.cant_dormitorios" label="Cantidad de Dormitorios" label-placement="floating" type="number"></ion-input>
+              <ion-input [(ngModel)]="rp.cant_dormitorios" label="Cantidad de Dormitorios" label-placement="floating" type="number"></ion-input>
             </ion-item>
             <ion-item class="ion-no-padding">
               <ion-icon name="water-outline" color="primary" item-left style="padding-right: 8px;"></ion-icon>
-              <ion-input [(ngModel)]="reg_propiedad.cant_banos" label="Cantidad de Baños" label-placement="floating" type="number"></ion-input>
+              <ion-input [(ngModel)]="rp.cant_banos" label="Cantidad de Baños" label-placement="floating" type="number"></ion-input>
             </ion-item>
             <div class="checkboxes">
               <ion-item class="ion-padding-top ion-no-padding" lines="none">
                 <ion-icon name="paw-outline" color="primary" item-left style="padding-right: 8px;"></ion-icon>
-                <ion-checkbox [(ngModel)]="reg_propiedad.permite_mascotas">¿Permite mascotas?</ion-checkbox>
+                <ion-checkbox [(ngModel)]="rp.permite_mascotas">¿Permite mascotas?</ion-checkbox>
               </ion-item>
               <ion-item class="ion-no-padding" lines="none">
                 <ion-icon name="cube-outline" color="primary" item-left style="padding-right: 8px;"></ion-icon>
-                <ion-checkbox [(ngModel)]="reg_propiedad.tiene_bodega">¿Tiene bodega?</ion-checkbox>
+                <ion-checkbox [(ngModel)]="rp.tiene_bodega">¿Tiene bodega?</ion-checkbox>
               </ion-item>
               <ion-item class="ion-no-padding" lines="none">
                 <ion-icon name="car-outline" color="primary" item-left style="padding-right: 8px;"></ion-icon>
-                <ion-checkbox [(ngModel)]="reg_propiedad.tiene_estacionamiento">¿Tiene estacionamiento?</ion-checkbox>
+                <ion-checkbox [(ngModel)]="rp.tiene_estacionamiento">¿Tiene estacionamiento?</ion-checkbox>
               </ion-item>
             </div>
             <div class="ion-padding-top">
               <ion-button (click)="registrarPropiedad()" expand="block" shape="round">
                 Grabar
               </ion-button>
+            </div>
+          </p-tabPanel>
+        </p-tabView>
+      </p-dialog>
+    </div>
+
+    <div id="modal_visualizacion" class="card flex justify-content-center">
+      <p-dialog header="Visualización de Propiedad" [(visible)]="visualizacion_propiedad_pendiente" [modal]="true" [style]="{ width: '80vw', height: '80vh' }" [draggable]="false" [resizable]="false">
+        <p-tabView [(activeIndex)]="indexActivo">
+          <p-tabPanel header="Datos Base">
+            <ion-item class="ion-no-padding">
+              <ion-icon name="cash-outline" color="primary" item-left style="padding-right: 8px;"></ion-icon>
+              <ion-input [value]="dpp.valor_propiedad" [readonly]="true" label="Valor Propiedad" label-placement="floating" type="number"></ion-input>
+            </ion-item>
+            <ion-item class="ion-no-padding">
+              <ion-icon name="business-outline" color="primary" item-left style="padding-right: 8px;"></ion-icon>
+              <ion-input [value]="dpp.nombre_tipo_propiedad" [readonly]="true" label="Tipo de Propiedad" label-placement="floating" type="text"></ion-input>
+            </ion-item>
+            <ion-item class="ion-no-padding">
+              <ion-icon name="compass-outline" color="primary" item-left style="padding-right: 8px;"></ion-icon>
+              <ion-input [value]="dpp.nombre_region" [readonly]="true" label="Región" label-placement="floating" type="text"></ion-input>
+            </ion-item>
+            <ion-item class="ion-no-padding">
+              <ion-icon name="navigate-outline" color="primary" item-left style="padding-right: 8px;"></ion-icon>
+              <ion-input [value]="dpp.nombre_comuna" [readonly]="true" label="Comuna" label-placement="floating" type="text"></ion-input>
+            </ion-item>
+            <div class="checkboxes">
+              <ion-item class="ion-padding-top ion-no-padding" lines="none">
+                <ion-icon name="pricetag-outline" color="primary" item-left style="padding-right: 8px;"></ion-icon>
+                <ion-checkbox [disabled]="true" [(ngModel)]="dpp.es_arriendo">¿Es arriendo?</ion-checkbox>
+              </ion-item>
+              <ion-item class="ion-no-padding" lines="none">
+                <ion-icon name="pricetag-outline" color="primary" item-left style="padding-right: 8px;"></ion-icon>
+                <ion-checkbox [disabled]="true" [(ngModel)]="dpp.es_venta">¿Es venta?</ion-checkbox>
+              </ion-item>
+            </div>
+          </p-tabPanel>
+          <p-tabPanel header="Características">
+            <ion-item class="ion-no-padding">
+              <ion-icon name="square-outline" color="primary" item-left style="padding-right: 8px;"></ion-icon>
+              <ion-input [value]="dpp.metros_totales" [readonly]="true" label="Metros Totales" label-placement="floating" type="number"></ion-input>
+            </ion-item>
+            <ion-item class="ion-no-padding">
+              <ion-icon name="square-outline" color="primary" item-left style="padding-right: 8px;"></ion-icon>
+              <ion-input [value]="dpp.metros_utiles" [readonly]="true" label="Metros Útiles" label-placement="floating" type="number"></ion-input>
+            </ion-item>
+            <ion-item class="ion-no-padding">
+              <ion-icon name="bed-outline" color="primary" item-left style="padding-right: 8px;"></ion-icon>
+              <ion-input [value]="dpp.cant_dormitorios" [readonly]="true" label="Cantidad de Dormitorios" label-placement="floating" type="number"></ion-input>
+            </ion-item>
+            <ion-item class="ion-no-padding">
+              <ion-icon name="water-outline" color="primary" item-left style="padding-right: 8px;"></ion-icon>
+              <ion-input [value]="dpp.cant_banos" [readonly]="true" label="Cantidad de Baños" label-placement="floating" type="number"></ion-input>
+            </ion-item>
+            <div class="checkboxes">
+              <ion-item class="ion-padding-top ion-no-padding" lines="none">
+                <ion-icon name="paw-outline" color="primary" item-left style="padding-right: 8px;"></ion-icon>
+                <ion-checkbox [disabled]="true" [(ngModel)]="dpp.permite_mascotas">¿Permite mascotas?</ion-checkbox>
+              </ion-item>
+              <ion-item class="ion-no-padding" lines="none">
+                <ion-icon name="cube-outline" color="primary" item-left style="padding-right: 8px;"></ion-icon>
+                <ion-checkbox [disabled]="true" [(ngModel)]="dpp.tiene_bodega">¿Tiene bodega?</ion-checkbox>
+              </ion-item>
+              <ion-item class="ion-no-padding" lines="none">
+                <ion-icon name="car-outline" color="primary" item-left style="padding-right: 8px;"></ion-icon>
+                <ion-checkbox [disabled]="true" [(ngModel)]="dpp.tiene_estacionamiento">¿Tiene estacionamiento?</ion-checkbox>
+              </ion-item>
             </div>
           </p-tabPanel>
         </p-tabView>

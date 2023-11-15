@@ -1,7 +1,7 @@
 import { Component, OnInit} from '@angular/core';
 import { LoadingController } from '@ionic/angular';
 import { PropiedadesService } from '../services/propiedades.service';
-import { Propiedad, RegistroPropiedad, JwtPayload } from '../interfaces/interface';
+import { Propiedad, RegistroPropiedad, JwtPayload, DetallePropiedad } from '../interfaces/interface';
 import { jwtDecode } from 'jwt-decode'
 
 @Component({
@@ -10,15 +10,15 @@ import { jwtDecode } from 'jwt-decode'
   styleUrls: ['./vista-usuario.page.scss'],
 })
 export class VistaUsuarioPage implements OnInit {
-  propiedades: Propiedad[];
-  propiedades_pendientes : Propiedad[];
+  propiedades_pendientes : Propiedad[] = []; // Array para almacenar las propiedades pendientes de aprobación
   registro_propiedad: boolean = false; // Booleano que inicializa el modal de registro de propiedad de PrimeNG
-  indexActivo: number = 0;
+  visualizacion_propiedad_pendiente : boolean = false;
+  indexActivo: number = 0; // Index del tab del modal de registro de propiedad de PrimeNG
   idRegionSeleccionado : number = 0;
   idComunaSeleccionada : number = 0;
   regiones: any[] = [];
   comunas: any[] = [];
-  reg_propiedad : RegistroPropiedad = {
+  rp : RegistroPropiedad = {
     id_usuario: this.idUsuarioDecode(),
     valor_propiedad: 0,
     es_arriendo: false,
@@ -33,6 +33,24 @@ export class VistaUsuarioPage implements OnInit {
     tiene_bodega: false,
     tiene_estacionamiento: false
   }
+  dpp : DetallePropiedad = {
+    id_propiedad: 0,
+    valor_propiedad: 0,
+    es_arriendo: true,
+    es_venta: false,
+    nombre_tipo_propiedad: '',
+    nombre_comuna: '',
+    nombre_region: '',
+    metros_totales: 0,
+    metros_utiles: 0,
+    cant_dormitorios: 0,
+    cant_banos: 0,
+    permite_mascotas: false,
+    tiene_bodega: false,
+    tiene_estacionamiento: false
+  }
+  estado_carga_pendientes : boolean = false;
+  estado_carga_base : boolean = false;
 
   constructor(
     // private loading: LoadingController, 
@@ -42,18 +60,7 @@ export class VistaUsuarioPage implements OnInit {
 
   ngOnInit() {
     this.propiedadesPendientes()
-    this.buscarPropiedadesEjemplo()
     this.buscarRegiones()
-    console.log(this.propiedadesPendientes())
-  }
-  
-  async buscarPropiedadesEjemplo() {
-    this.api.devolverListaPropiedades()
-      .subscribe({
-        next : (data) => {
-          this.propiedades = data;
-        }
-      })
   }
 
   async buscarRegiones() {
@@ -85,11 +92,15 @@ export class VistaUsuarioPage implements OnInit {
   }
 
   cambioComuna() {
-    this.reg_propiedad.id_comuna = this.idComunaSeleccionada;
+    this.rp.id_comuna = this.idComunaSeleccionada;
   }
 
-  showDialog() {
+  modalRegistroPropiedad() {
     this.registro_propiedad = true;
+  }
+
+  modalVisualizacionPropiedad() {
+    this.visualizacion_propiedad_pendiente = true;
   }
   
   checkTipo() {
@@ -97,16 +108,12 @@ export class VistaUsuarioPage implements OnInit {
   }
 
   registrarPropiedad() {
-    console.log(this.reg_propiedad)
-    this.api.registrarPropiedadUsuario(this.reg_propiedad, localStorage.getItem('token') as string).subscribe({
+    this.api.registrarPropiedadUsuario(this.rp, localStorage.getItem('token') as string).subscribe({
       next : (data) => {
-        console.log(data)
       },
       error : (error) => {
-        console.log(error)
       },
       complete : () => {
-        console.log('Completado')
       }
     })
   }
@@ -114,26 +121,23 @@ export class VistaUsuarioPage implements OnInit {
   async propiedadesPendientes() {
     this.api.devolverPropiedadesPendientesUsuario(this.idUsuarioDecode(), localStorage.getItem('token') as string)
       .subscribe({
-        next : (data) => {
-          this.propiedades_pendientes = data;
+        next : (data : any) => {
+          if (data.hasOwnProperty('status') && data.status == 404) {
+            console.log('Error 404, no existen registros.')
+            this.estado_carga_pendientes = false;
+          } else {
+            this.propiedades_pendientes = Array.isArray(data) ? data : [data];
+            this.estado_carga_pendientes = true;
+          }
+        },
+        error : (error) => {
+          this.estado_carga_pendientes = false;
+          console.log(error)
+        },
+        complete : () => {
+          console.log(this.propiedades_pendientes)
+          console.log('Completada la devolución de propiedades pendientes por usuario.')
         }
       })
   }
-
-
-  // @ViewChild('miModal', { static: false }) modal: IonModal;
-  // name: string;
-  // message: string = 'No ha ingresado ningún nombre';
-  // cancel() {
-  //   this.modal.dismiss(null, 'cancel');
-  // }
-  // confirm() {
-  //   this.modal.dismiss(this.name, 'confirm');
-  // }
-  // onWillDismiss(event: Event) {
-  //   const ev = event as CustomEvent<OverlayEventDetail<string>>;
-  //   if (ev.detail.role === 'confirm') {
-  //     this.message = `Hello, ${ev.detail.data}!`;
-  //   }
-  // }
 }
