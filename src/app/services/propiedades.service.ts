@@ -110,8 +110,28 @@ export class PropiedadesService implements OnInit {
       const url = 'http://localhost:9000/detalle_propiedad_pendiente/'
       return this.http.post<DetallePropiedad>(url, {'id_usuario': id_usuario, 'id_propiedad': id_propiedad}, httpOptionsToken)
       .pipe(
-        tap((detalle_propiedad: DetallePropiedad) => console.log(detalle_propiedad)),
+        // tap((detalle_propiedad: DetallePropiedad) => console.log(detalle_propiedad)),
         catchError(this.handleError<DetallePropiedad>('ERROR: Registro Propiedad'))
       )
     }
+    // Listado de propiedades validadas del usuario
+    listaBPropUsuario(id: number, auth_token: string){
+      const httpOptionsToken = { headers : new HttpHeaders({'Content-Type' : 'application/json', 'Authorization' : `Bearer ${auth_token}`} )}
+      const url = 'http://localhost:9000/propiedades_validadas/'
+      return this.http.post<Propiedad[]>(url, {'id_usuario': id}, httpOptionsToken)
+      .pipe(
+        // tap((propiedad: Propiedad[]) => console.log(propiedad)),
+        catchError(this.handleError<Propiedad[]>('ERROR: Registro Propiedad'))
+      )
+    }
+
+    detailBPropUsuario(id: number, prop: number, auth_token: string){
+      const httpOptionsToken = { headers : new HttpHeaders({'Content-Type' : 'application/json', 'Authorization' : `Bearer ${auth_token}`} )}
+      const url = 'http://localhost:9000/detalle_propiedad_validada/'
+      return this.http.post<DetallePropiedad>(url, {'id_usuario': id, 'id_propiedad': prop} , httpOptionsToken)
+      .pipe(
+        // tap((propiedad: DetallePropiedad) => console.log(propiedad)),
+        catchError(this.handleError<DetallePropiedad>('ERROR: Registro Propiedad'))
+      )
+    }     
 }
