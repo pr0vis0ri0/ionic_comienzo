@@ -17,7 +17,8 @@ export class PropiedadesService implements OnInit {
     constructor(private http : HttpClient) {}
 
     ngOnInit() {
-      this.devolverDetallePropiedadesPendientesAdmin(1,66,'eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwiaWF0IjoxNjE5NjY0NjQ2LCJleHAiOjE2');
+      // this.devolverDetallePropiedadesPendientesAdmin(1,66,'eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwiaWF0IjoxNjE5NjY0NjQ2LCJleHAiOjE2');
+      // this.devolverDetallePropiedadesAdmin(1, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzAyNzc3NzUzLCJpYXQiOjE3MDAxODU3NTMsImp0aSI6IjU2M2RiMWM3NDAzYzQwNzZiMzJkNWM5ZWYxYjgxMzUzIiwidXNlcl9pZCI6MSwiaWRfcGVyZmlsIjoxLCJpZF91c3VhcmlvIjoxfQ.8-NJTAoYhgDzWyCOXb8S1NFBvOZ_NmMNgjZQYfOBzEk');
     }
 
     private handleError<T> (operation = 'operation', result? : T) {
@@ -146,6 +147,15 @@ export class PropiedadesService implements OnInit {
       const httpOptionsToken = { headers : new HttpHeaders({'Content-Type' : 'application/json', 'Authorization' : `Bearer ${auth_token}`} )}
       const url = 'http://localhost:9000/detalle_prop_adm/'
       return this.http.post<any>(url, {'id_usuario': id_usuario, 'id_propiedad': id_propiedad}, httpOptionsToken)
+      .pipe(
+        tap((detalle_propiedad: any) => console.log(detalle_propiedad)),
+        catchError(this.handleError<any>('ERROR: Registro Propiedad'))
+      )
+    } 
+    devolverDetalletodasprop(id_usuario: number, auth_token: string){
+      const httpOptionsToken = { headers : new HttpHeaders({'Content-Type' : 'application/json', 'Authorization' : `Bearer ${auth_token}`} )}
+      const url = 'http://localhost:9000/adm_prop_base/'
+      return this.http.post<any>(url, {'id_usuario': id_usuario}, httpOptionsToken)
       .pipe(
         tap((detalle_propiedad: any) => console.log(detalle_propiedad)),
         catchError(this.handleError<any>('ERROR: Registro Propiedad'))

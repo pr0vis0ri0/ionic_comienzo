@@ -12,19 +12,19 @@
 
   <div *ngIf="estado_carga_pendientes">
     <p-table [value]="propiedades_pendientes" [tableStyle]="{ 'min-width': '50rem'}">
-      <ng-template pTemplate="header">
-        <tr>
-            <th style="padding: 15px;">ID</th>
-            <th style="padding: 15px;">Propietario</th>
-            <th style="padding: 15px;">Tipo de propiedad</th>
-            <th style="padding: 15px;">Modalidad</th>
-            <th style="padding: 15px;">Valor propiedad</th>
-            <th style="padding: 15px;">Comuna</th>
-            <th style="padding: 15px;">Estado</th>
-            <th style="padding: 15px;">Accion</th>
-            
-          </tr>
-        </ng-template>
+          <ng-template pTemplate="header">
+            <tr>
+                <th style="padding: 15px;">ID</th>
+                <th style="padding: 15px;">Propietario</th>
+                <th style="padding: 15px;">Tipo de propiedad</th>
+                <th style="padding: 15px;">Modalidad</th>
+                <th style="padding: 15px;">Valor propiedad</th>
+                <th style="padding: 15px;">Comuna</th>
+                <th style="padding: 15px;">Estado</th>
+                <th style="padding: 15px;">Accion</th>
+                
+              </tr>
+          </ng-template>
           <ng-template pTemplate="body" let-item>
             <tr>
                 <td style="padding: 12px;">{{item.id_propiedad}}</td>
@@ -46,12 +46,52 @@
                   </ion-button>
                 </td>
             </tr>
-    </ng-template>
-      
+          </ng-template>
     </p-table>
-    
+  
   </div>
 </ion-card>
+
+  <ion-card>
+    <ion-card-header color="primary">
+      <ion-card-subtitle style="color: white;">Propiedades pendientes de aprobación</ion-card-subtitle>
+    </ion-card-header>
+  
+  <div *ngIf="estado_carga_prop">
+    <p-table  [value]="todas_propiedades" [tableStyle]="{ 'min-width': '50rem'}">
+      <ng-template pTemplate="header">
+        <tr>
+            <th style="padding: 15px;">ID</th>
+            <th style="padding: 15px;">Propietario</th>
+            <th style="padding: 15px;">Tipo de propiedad</th>
+            <th style="padding: 15px;">Modalidad</th>
+            <th style="padding: 15px;">Valor propiedad</th>
+            <th style="padding: 15px;">Comuna</th>
+            <th style="padding: 15px;">Estado</th>
+            <th style="padding: 15px;">Accion</th>
+            
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-dats>
+          <tr>
+              <th style="padding: 15px;">{{dats.id_propiedad}}</th>
+              <th style="padding: 15px;">{{dats.nombre_usuario}}</th>
+              <th style="padding: 15px;">{{dats.nombre_tipo_propiedad}}</th>
+              <th style="padding: 15px;">{{dats.es_arriendo ? 'Arriendo' : 'Venta'}}</th>
+              <th style="padding: 15px;">{{dats.valor_propiedad}}</th>
+              <th style="padding: 15px;">{{dats.nombre_comuna}}</th>
+              <th style="padding: 15px;">{{dats.descripcion_estado}}</th>
+              <th >                  
+                <ion-button (click)="viewPropPendienteM(dats.id_propiedad)"  size="small" fill="clear" shape="round">
+                <ion-icon name="eye-outline" color="primary" size="small"></ion-icon>
+              </ion-button></th>
+          </tr>
+        </ng-template>
+    
+    </p-table>
+  </div>
+</ion-card>
+  
   <!-- Modal -->
   <div id="modalprop" class="card flex justify-content-center">
     <p-dialog header="Visualizacion de Propiedad" [(visible)]="modal_propiedad" [modal]="true" [style]="{ width: '80vw', height: '80vh' }" [draggable]="false" [resizable]="false">
@@ -116,9 +156,76 @@
               </ion-item>
             </div>
           </p-tabPanel>
-          <p-tabPanel *ngIf >
 
+        </p-tabView>
+    </p-dialog>
+
+  </div>
+  <!-- MODAL2 -->
+  <div id="modalprop" class="card flex justify-content-center">
+    <p-dialog header="Visualizacion de Propiedad" [(visible)]="modal_propiedad" [modal]="true" [style]="{ width: '80vw', height: '80vh' }" [draggable]="false" [resizable]="false">
+        <p-tabView [(activeIndex)]="indexActivo">
+          <p-tabPanel header="Datos Base">
+            <ion-item class="ion-no-padding">
+              <ion-icon name="cash-outline" color="primary" item-left style="padding-right: 8px;"></ion-icon>
+              <ion-input [(ngModel)]="vss.valor_propiedad" label="Valor Propiedad" label-placement="floating" type="number"></ion-input>
+            </ion-item>
+            <ion-item class="ion-no-padding">
+              <ion-icon name="business-outline" color="primary" item-left style="padding-right: 8px;"></ion-icon>
+              <ion-input [value]="vss.nombre_tipo_propiedad" [readonly]="true" label="Tipo de Propiedad" label-placement="floating" type="text"></ion-input>
+            </ion-item>
+            <ion-item class="ion-no-padding">
+              <ion-icon name="compass-outline" color="primary" item-left style="padding-right: 8px;"></ion-icon>
+              <ion-input [value]="vss.nombre_region" [readonly]="true" label="Región" label-placement="floating" type="text"></ion-input>
+            </ion-item>
+            <ion-item class="ion-no-padding">
+              <ion-icon name="navigate-outline" color="primary" item-left style="padding-right: 8px;"></ion-icon>
+              <ion-input [value]="vss.nombre_comuna" [readonly]="true" label="Comuna" label-placement="floating" type="text"></ion-input>
+            </ion-item>
+            <div class="checkboxes">
+              <ion-item class="ion-padding-top ion-no-padding" lines="none">
+                <ion-icon name="pricetag-outline" color="primary" item-left style="padding-right: 8px;"></ion-icon>
+                <ion-checkbox [disabled]="true" [(ngModel)]="vss.es_arriendo">¿Es arriendo?</ion-checkbox>
+              </ion-item>
+              <ion-item class="ion-no-padding" lines="none">
+                <ion-icon name="pricetag-outline" color="primary" item-left style="padding-right: 8px;"></ion-icon>
+                <ion-checkbox [disabled]="true" [(ngModel)]="vss.es_venta">¿Es venta?</ion-checkbox>
+              </ion-item>
+            </div>
           </p-tabPanel>
+          <p-tabPanel header="Características">
+            <ion-item class="ion-no-padding">
+              <ion-icon name="square-outline" color="primary" item-left style="padding-right: 8px;"></ion-icon>
+              <ion-input [value]="vss.metros_totales" [readonly]="true" label="Metros Totales" label-placement="floating" type="number"></ion-input>
+            </ion-item>
+            <ion-item class="ion-no-padding">
+              <ion-icon name="square-outline" color="primary" item-left style="padding-right: 8px;"></ion-icon>
+              <ion-input [value]="vss.metros_utiles" [readonly]="true" label="Metros Útiles" label-placement="floating" type="number"></ion-input>
+            </ion-item>
+            <ion-item class="ion-no-padding">
+              <ion-icon name="bed-outline" color="primary" item-left style="padding-right: 8px;"></ion-icon>
+              <ion-input [value]="vss.cant_dormitorios" [readonly]="true" label="Cantidad de Dormitorios" label-placement="floating" type="number"></ion-input>
+            </ion-item>
+            <ion-item class="ion-no-padding">
+              <ion-icon name="water-outline" color="primary" item-left style="padding-right: 8px;"></ion-icon>
+              <ion-input [value]="vss.cant_banos" [readonly]="true" label="Cantidad de Baños" label-placement="floating" type="number"></ion-input>
+            </ion-item>
+            <div class="checkboxes">
+              <ion-item class="ion-padding-top ion-no-padding" lines="none">
+                <ion-icon name="paw-outline" color="primary" item-left style="padding-right: 8px;"></ion-icon>
+                <ion-checkbox [disabled]="true" [(ngModel)]="vss.permite_mascotas">¿Permite mascotas?</ion-checkbox>
+              </ion-item>
+              <ion-item class="ion-no-padding" lines="none">
+                <ion-icon name="cube-outline" color="primary" item-left style="padding-right: 8px;"></ion-icon>
+                <ion-checkbox [disabled]="true" [(ngModel)]="vss.tiene_bodega">¿Tiene bodega?</ion-checkbox>
+              </ion-item>
+              <ion-item class="ion-no-padding" lines="none">
+                <ion-icon name="car-outline" color="primary" item-left style="padding-right: 8px;"></ion-icon>
+                <ion-checkbox [disabled]="true" [(ngModel)]="vss.tiene_estacionamiento">¿Tiene estacionamiento?</ion-checkbox>
+              </ion-item>
+            </div>
+          </p-tabPanel>
+
         </p-tabView>
     </p-dialog>
 
