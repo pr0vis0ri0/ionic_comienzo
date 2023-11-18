@@ -50,6 +50,7 @@ export class VistaUsuarioPage implements OnInit {
     permite_mascotas: false,
     tiene_bodega: false,
     tiene_estacionamiento: false
+    
   }
   estado_carga_pendientes : boolean = false;
   estado_carga_base : boolean = false;

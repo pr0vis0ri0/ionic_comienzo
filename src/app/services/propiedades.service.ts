@@ -1,5 +1,5 @@
 import { Injectable, OnInit } from '@angular/core';
-import { Propiedad, DetallePropiedad, RegistroPropiedad } from '../interfaces/interface';
+import { Propiedad, DetallePropiedad, RegistroPropiedad,AdmPropiedadBase } from '../interfaces/interface';
 import { Observable, of, throwError } from 'rxjs';
 import { catchError, tap, map } from 'rxjs/operators';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http'
@@ -17,9 +17,7 @@ export class PropiedadesService implements OnInit {
     constructor(private http : HttpClient) {}
 
     ngOnInit() {
-      this.devolerRegiones().subscribe((res) => {
-        console.log("Regiones : ", res)
-      })
+      this.devolverDetallePropiedadesPendientesAdmin(1,66,'eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwiaWF0IjoxNjE5NjY0NjQ2LCJleHAiOjE2');
     }
 
     private handleError<T> (operation = 'operation', result? : T) {
@@ -133,5 +131,24 @@ export class PropiedadesService implements OnInit {
         // tap((propiedad: DetallePropiedad) => console.log(propiedad)),
         catchError(this.handleError<DetallePropiedad>('ERROR: Registro Propiedad'))
       )
-    }     
-}
+    }
+    devolverpropiedadesrevision(id: number , auth_token: string){
+      const httpOptionsToken = { headers : new HttpHeaders({'Content-Type' : 'application/json', 'Authorization' : `Bearer ${auth_token}`} )}
+      const url = 'http://localhost:9000/adm_prop_pendientes/'
+      return this.http.post<AdmPropiedadBase[]>(url, {'id_usuario': id} , httpOptionsToken)
+      .pipe(  
+        catchError(this.handleError<AdmPropiedadBase[]>('ERROR: Registro Propiedad')),
+        // tap((propiedad: AdmPropiedadBase[]) => console.log(propiedad))
+      )
+      
+    }
+    devolverDetallePropiedadesPendientesAdmin(id_usuario: number, id_propiedad: number, auth_token: string){
+      const httpOptionsToken = { headers : new HttpHeaders({'Content-Type' : 'application/json', 'Authorization' : `Bearer ${auth_token}`} )}
+      const url = 'http://localhost:9000/detalle_prop_adm/'
+      return this.http.post<any>(url, {'id_usuario': id_usuario, 'id_propiedad': id_propiedad}, httpOptionsToken)
+      .pipe(
+        tap((detalle_propiedad: any) => console.log(detalle_propiedad)),
+        catchError(this.handleError<any>('ERROR: Registro Propiedad'))
+      )
+    } 
+  }

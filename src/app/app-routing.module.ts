@@ -39,7 +39,10 @@ const routes: Routes = [
     path: 'PagInicio',
     loadChildren: () => import('./PagInicio/PagInicio.module').then( m => m.PagInicioPageModule)
   },
-
+  {
+    path: 'vsadmin',
+    loadChildren: () => import('./vsadmin/vsadmin.module').then( m => m.VsadminPageModule)
+  },
   
   // {
   //   path: 'cliente/listar',
