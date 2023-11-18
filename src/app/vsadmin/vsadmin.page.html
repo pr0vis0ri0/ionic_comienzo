@@ -6,8 +6,8 @@
 
 <ion-content [fullscreen]="true">
 <ion-card>
-  <ion-card-header color="primary">
-    <ion-card-subtitle style="color: white;">Propiedades pendientes de aprobación</ion-card-subtitle>
+  <ion-card-header color="warning">
+    <ion-card-subtitle style="color: white;">Propiedades pendientes de revisión</ion-card-subtitle>
   </ion-card-header>
 
   <div *ngIf="estado_carga_pendientes">
@@ -54,7 +54,7 @@
 
   <ion-card>
     <ion-card-header color="primary">
-      <ion-card-subtitle style="color: white;">Propiedades pendientes de aprobación</ion-card-subtitle>
+      <ion-card-subtitle style="color: white;">Base de propiedades</ion-card-subtitle>
     </ion-card-header>
   
   <div *ngIf="estado_carga_prop">
@@ -62,7 +62,7 @@
       <ng-template pTemplate="header">
         <tr>
             <th style="padding: 15px;">ID</th>
-            <th style="padding: 15px;">Propietario</th>
+            <th style="padding: 15px;" >Propietario</th>
             <th style="padding: 15px;">Tipo de propiedad</th>
             <th style="padding: 15px;">Modalidad</th>
             <th style="padding: 15px;">Valor propiedad</th>
@@ -74,17 +74,17 @@
         </ng-template>
         <ng-template pTemplate="body" let-dats>
           <tr>
-              <th style="padding: 15px;">{{dats.id_propiedad}}</th>
-              <th style="padding: 15px;">{{dats.nombre_usuario}}</th>
-              <th style="padding: 15px;">{{dats.nombre_tipo_propiedad}}</th>
-              <th style="padding: 15px;">{{dats.es_arriendo ? 'Arriendo' : 'Venta'}}</th>
-              <th style="padding: 15px;">{{dats.valor_propiedad}}</th>
-              <th style="padding: 15px;">{{dats.nombre_comuna}}</th>
-              <th style="padding: 15px;">{{dats.descripcion_estado}}</th>
-              <th >                  
+              <td style="padding: 15px; font-size: small;">{{dats.id_propiedad}}</td>
+              <td style="padding: 15px; font-size: small;">{{dats.nombre_usuario}}</td>
+              <td style="padding: 15px; font-size: small;">{{dats.nombre_tipo_propiedad}}</td>
+              <td style="padding: 15px; font-size: small;">{{dats.es_arriendo ? 'Arriendo' : 'Venta'}}</td>
+              <td style="padding: 15px; font-size: small;">{{dats.valor_propiedad}}</td>
+              <td style="padding: 15px; font-size: small;">{{dats.nombre_comuna}}</td>
+              <td style="padding: 15px;">{{dats.descripcion_estado}}</td>
+              <td >                  
                 <ion-button (click)="viewPropPendienteM(dats.id_propiedad)"  size="small" fill="clear" shape="round">
                 <ion-icon name="eye-outline" color="primary" size="small"></ion-icon>
-              </ion-button></th>
+              </ion-button></td>
           </tr>
         </ng-template>
     
