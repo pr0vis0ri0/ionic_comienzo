@@ -33,7 +33,7 @@ export class PropiedadesPage implements OnInit {
     this.getPropiedades()
   }
 
-  checkToken() {
+  async checkToken() {
     const token = localStorage.getItem('token')
     if (token == null) {
       this.router.navigate(['/login']);

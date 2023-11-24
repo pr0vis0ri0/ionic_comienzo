@@ -1,6 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>vsadmin</ion-title>
+    <ion-title>Panel de Control</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -11,7 +11,7 @@
   </ion-card-header>
 
   <div *ngIf="estado_carga_pendientes">
-    <p-table [value]="propiedades_pendientes" [tableStyle]="{ 'min-width': '50rem'}">
+    <p-table [value]="propiedades_pendientes" [tableStyle]="{ 'min-width': '80rem'}">
           <ng-template pTemplate="header">
             <tr>
                 <th style="padding: 15px;">ID</th>
@@ -22,24 +22,23 @@
                 <th style="padding: 15px;">Comuna</th>
                 <th style="padding: 15px;">Estado</th>
                 <th style="padding: 15px;">Accion</th>
-                
-              </tr>
+            </tr>
           </ng-template>
           <ng-template pTemplate="body" let-item>
             <tr>
-                <td style="padding: 12px;">{{item.id_propiedad}}</td>
-                <td style="padding: 12px;">{{item.nombre_usuario}}</td>
-                <td style="padding: 12px;">{{item.nombre_tipo_propiedad}}</td>
-                <td style="padding: 12px;">{{item.es_arriendo ? 'Arriendo' : 'Venta'}}</td>
-                <td style="padding: 12px;">{{item.valor_propiedad}}</td>
-                <td style="padding: 12px;">{{item.nombre_comuna}}</td>
-                <td style="padding: 12px;">{{item.descripcion_estado}}</td>
-                <td style="padding: 12px; display: flex; justify-content: center;">
-                  <ion-button (click)="viewPropPendiente(item.id_propiedad)"  size="small" fill="clear" shape="round">
-                    <ion-icon name="checkmark-circle-outline" color="success" size="small"></ion-icon>
-                  </ion-button>
+                <td style="padding: 12px; font-size: small;">{{item.id_propiedad}}</td>
+                <td style="padding: 12px; font-size: small;">{{item.nombre_usuario}}</td>
+                <td style="padding: 12px; font-size: small;">{{item.nombre_tipo_propiedad}}</td>
+                <td style="padding: 12px; font-size: small;">{{item.es_arriendo ? 'Arriendo' : 'Venta'}}</td>
+                <td style="padding: 12px; font-size: small;">{{item.valor_propiedad}}</td>
+                <td style="padding: 12px; font-size: small;">{{item.nombre_comuna}}</td>
+                <td style="padding: 12px; font-size: small;">{{item.descripcion_estado}}</td>
+                <td style="padding: 12px;">
                   <ion-button (click)="viewPropPendiente(item.id_propiedad)" size="small" fill="clear" shape="round">
                     <ion-icon name="eye-outline" color="primary" size="small"></ion-icon>
+                  </ion-button>
+                  <ion-button (click)="viewPropPendiente(item.id_propiedad)"  size="small" fill="clear" shape="round">
+                    <ion-icon name="checkmark-circle-outline" color="success" size="small"></ion-icon>
                   </ion-button>
                   <ion-button (click)="viewPropPendiente(item.id_propiedad)" size="small" fill="clear" shape="round">
                     <ion-icon name="trash-outline" color="danger" size="small"></ion-icon>
@@ -58,7 +57,7 @@
     </ion-card-header>
   
   <div *ngIf="estado_carga_prop">
-    <p-table  [value]="todas_propiedades" [tableStyle]="{ 'min-width': '50rem'}">
+    <p-table  [value]="todas_propiedades" [tableStyle]="{ 'min-width': '80rem'}">
       <ng-template pTemplate="header">
         <tr>
             <th style="padding: 15px;">ID</th>
@@ -74,17 +73,18 @@
         </ng-template>
         <ng-template pTemplate="body" let-dats>
           <tr>
-              <td style="padding: 15px; font-size: small;">{{dats.id_propiedad}}</td>
-              <td style="padding: 15px; font-size: small;">{{dats.nombre_usuario}}</td>
-              <td style="padding: 15px; font-size: small;">{{dats.nombre_tipo_propiedad}}</td>
-              <td style="padding: 15px; font-size: small;">{{dats.es_arriendo ? 'Arriendo' : 'Venta'}}</td>
-              <td style="padding: 15px; font-size: small;">{{dats.valor_propiedad}}</td>
-              <td style="padding: 15px; font-size: small;">{{dats.nombre_comuna}}</td>
-              <td style="padding: 15px;">{{dats.descripcion_estado}}</td>
-              <td >                  
+              <td style="padding: 12px; font-size: small;">{{dats.id_propiedad}}</td>
+              <td style="padding: 12px; font-size: small;">{{dats.nombre_usuario}}</td>
+              <td style="padding: 12px; font-size: small;">{{dats.nombre_tipo_propiedad}}</td>
+              <td style="padding: 12px; font-size: small;">{{dats.es_arriendo ? 'Arriendo' : 'Venta'}}</td>
+              <td style="padding: 12px; font-size: small;">{{dats.valor_propiedad}}</td>
+              <td style="padding: 12px; font-size: small;">{{dats.nombre_comuna}}</td>
+              <td style="padding: 12px; font-size: small;">{{dats.descripcion_estado}}</td>
+              <td style="padding: 12px;">                  
                 <ion-button (click)="viewPropPendienteM(dats.id_propiedad)"  size="small" fill="clear" shape="round">
                 <ion-icon name="eye-outline" color="primary" size="small"></ion-icon>
-              </ion-button></td>
+              </ion-button>
+            </td>
           </tr>
         </ng-template>
     
@@ -94,7 +94,7 @@
   
   <!-- Modal -->
   <div id="modalprop" class="card flex justify-content-center">
-    <p-dialog header="Visualizacion de Propiedad" [(visible)]="modal_propiedad" [modal]="true" [style]="{ width: '80vw', height: '80vh' }" [draggable]="false" [resizable]="false">
+    <p-dialog header="Visualizacion de Propiedad" [(visible)]="modal_propiedad_1" [modal]="true" [style]="{ width: '80vw', height: '80vh' }" [draggable]="false" [resizable]="false">
         <p-tabView [(activeIndex)]="indexActivo">
           <p-tabPanel header="Datos Base">
             <ion-item class="ion-no-padding">
@@ -163,7 +163,7 @@
   </div>
   <!-- MODAL2 -->
   <div id="modalprop" class="card flex justify-content-center">
-    <p-dialog header="Visualizacion de Propiedad" [(visible)]="modal_propiedad" [modal]="true" [style]="{ width: '80vw', height: '80vh' }" [draggable]="false" [resizable]="false">
+    <p-dialog header="Visualizacion de Propiedad" [(visible)]="modal_propiedad_2" [modal]="true" [style]="{ width: '80vw', height: '80vh' }" [draggable]="false" [resizable]="false">
         <p-tabView [(activeIndex)]="indexActivo">
           <p-tabPanel header="Datos Base">
             <ion-item class="ion-no-padding">
