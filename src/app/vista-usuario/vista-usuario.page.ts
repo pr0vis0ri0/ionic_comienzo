@@ -54,41 +54,7 @@ export class VistaUsuarioPage implements OnInit {
   }
   estado_carga_pendientes : boolean = false;
   estado_carga_base : boolean = false;
-  // hazme un array con dos objetos, aleatorios
-  arr : any = [
-    {
-      id_propiedad: 0,
-      valor_propiedad: 0,
-      es_arriendo: true,
-      es_venta: false,
-      nombre_tipo_propiedad: '',
-      nombre_comuna: '',
-      nombre_region: '',
-      metros_totales: 0,
-      metros_utiles: 0,
-      cant_dormitorios: 0,
-      cant_banos: 0,
-      permite_mascotas: false,
-      tiene_bodega: false,
-      tiene_estacionamiento: false
-    },
-    {
-      id_propiedad: 0,
-      valor_propiedad: 0,
-      es_arriendo: true,
-      es_venta: false,
-      nombre_tipo_propiedad: '',
-      nombre_comuna: '',
-      nombre_region: '',
-      metros_totales: 0,
-      metros_utiles: 0,
-      cant_dormitorios: 0,
-      cant_banos: 0,
-      permite_mascotas: false,
-      tiene_bodega: false,
-      tiene_estacionamiento: false
-    }
-  ]
+
   constructor(
     private loading: LoadingController, 
     private router: Router,
@@ -181,17 +147,16 @@ export class VistaUsuarioPage implements OnInit {
       })
   }
 
-  checkTipo() {
-    
-  }
-
   registrarPropiedad() {
     this.api.registrarPropiedadUsuario(this.rp, localStorage.getItem('token') as string).subscribe({
       next : (data) => {
+        console.log(data)
       },
       error : (error) => {
+        console.log(error)
       },
       complete : () => {
+        location.reload()
       }
     })
   }

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PropiedadesService } from '../services/propiedades.service';
 import { jwtDecode } from 'jwt-decode'
 import { LoadingController } from '@ionic/angular';
-import {JwtPayload,AdmPropiedadBase, Propiedad, TodasPropiedades } from '../interfaces/interface';
+import {JwtPayload,AdmPropiedadBase, Propiedad, TodasPropiedades, EstadoPropiedad } from '../interfaces/interface';
 import { Router } from '@angular/router';
 
 @Component({
@@ -66,6 +66,8 @@ export class VsadminPage implements OnInit {
     nombre_usuario: '',
   };
 
+  updPropiedad : EstadoPropiedad;
+
   devolverToken(): string | null {
     return localStorage.getItem('token');
   }
@@ -79,28 +81,6 @@ export class VsadminPage implements OnInit {
   }
 
   async viewPropPendiente(id_propiedad: number) {
-    // const loading = await this.loading.create({
-    //   message: 'Buscando información de la propiedad seleccionada...',
-    // });
-    // await loading.present();
-    // await this.api.devolverDetallePropiedadesPendientesAdmin(
-    //     this.idUsuarioDecode(),
-    //     id_propiedad,
-    //     localStorage.getItem('token') as string
-    //   )
-    //   .subscribe({
-    //     next: (d) => {
-    //       this.vs = d;
-    //     },
-    //     error: (e) => {
-    //       console.log(e);
-    //     },
-    //     complete: () => {
-    //       loading.message = 'Información encontrada.';
-    //       loading.dismiss()
-    //       this.modal_propiedad = true;
-    //     }
-    //   })
     let registro : any  = this.propiedades_pendientes.find((element)=>element.id_propiedad==id_propiedad);
     this.vs = registro;
     const loading = await this.loading.create({
@@ -167,6 +147,62 @@ export class VsadminPage implements OnInit {
         complete : () => {
           console.log('metodo' , this.todas_propiedades)
           console.log('Completada la devolución de propiedades pendientes por usuario.')
+        }
+      })
+  }
+
+  async validarPropiedad(id_propiedad : number){
+    this.updPropiedad = {
+      id_usuario : this.idUsuarioDecode(),
+      id_propiedad : id_propiedad,
+      ultimo_estado : 2,
+      observacion_denegacion : ''
+    }
+    const loading = await this.loading.create({
+      message: 'Actualizando propiedad...'
+    })
+    loading.present()
+    this.api.cambiarEstadoPropiedad(this.updPropiedad, localStorage.getItem('token') as string)
+      .subscribe({
+        next : (r) => {
+          // console.log(r)
+          loading.message = "Propiedad validada."
+          loading.dismiss()
+          location.reload()
+        },
+        error : (e) => {
+          console.log(e)
+        },
+        complete : () => {
+
+        }
+      })
+  }
+
+  async denegarPropiedad(id_propiedad : number){
+    this.updPropiedad = {
+      id_usuario : this.idUsuarioDecode(),
+      id_propiedad : id_propiedad,
+      ultimo_estado : 3,
+      observacion_denegacion : 'Se denegó la propiedad.'
+    }
+    const loading = await this.loading.create({
+      message: 'Actualizando propiedad...'
+    })
+    loading.present()
+    this.api.cambiarEstadoPropiedad(this.updPropiedad, localStorage.getItem('token') as string)
+      .subscribe({
+        next : (r) => {
+          // console.log(r)
+          loading.message = "Propiedad denegada."
+          loading.dismiss()
+          location.reload()
+        },
+        error : (e) => {
+          console.log(e)
+        },
+        complete : () => {
+          
         }
       })
   }

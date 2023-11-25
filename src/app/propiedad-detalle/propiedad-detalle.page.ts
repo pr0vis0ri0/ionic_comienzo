@@ -32,11 +32,11 @@ export class PropiedadDetallePage implements OnInit {
     if (this.propiedadId !== null) {
       this.getDetallePropiedad(parseInt(this.propiedadId));
     } else {
-      this.propiedadId = '';
+      this.router.navigate(['/propiedades'])
     }
   }
 
-  checkToken() {
+  async checkToken() {
     const token = localStorage.getItem('token')
     if (token == null) {
       this.router.navigate(['/login']);
@@ -77,8 +77,6 @@ export class PropiedadDetallePage implements OnInit {
           console.log(res.token)
           console.log(res.url + '?token_ws=' + res.token)
           localStorage.setItem('token',res.token)
-          // const redirect = (url : string, asLink = true) => asLink ? (window.location.href = url) : window.location.replace(url);
-          // this.router.navigate(['/transbank', res.token])
           window.location.href= res.url + '?token_ws=' + res.token
         },
         complete : () => {},

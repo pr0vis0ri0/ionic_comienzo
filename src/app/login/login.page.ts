@@ -29,13 +29,20 @@ export class LoginPage {
                 password: this.iPassword
             })
             .subscribe({
-                next : (res) => {
-                    localStorage.setItem('token', res.access || "ERROR")
-                    loading.message = "Sesión iniciada"
-                    loading.dismiss()
-                    this.router.navigate(['/PagInicio']);
+                next : (res : any) => {
+                    if (res.hasOwnProperty('status')) {
+                        loading.message = "Credenciales incorrectas."
+                        loading.dismiss()
+                    } else if (res.hasOwnProperty('access') && res.hasOwnProperty('refresh')) {
+                        localStorage.setItem('token', res.access)
+                        loading.message = "Credenciales correctas."
+                        loading.dismiss()
+                        this.router.navigate(['/PagInicio'])
+                    }
                 },
-                complete : () => {},
+                complete : () => {
+
+                },
                 error : (err) => {
                     console.log("Error : ", err)
                     loading.dismiss()

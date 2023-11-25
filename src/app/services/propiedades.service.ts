@@ -1,5 +1,5 @@
 import { Injectable, OnInit } from '@angular/core';
-import { Propiedad, DetallePropiedad, RegistroPropiedad,AdmPropiedadBase } from '../interfaces/interface';
+import { Propiedad, DetallePropiedad, RegistroPropiedad,AdmPropiedadBase, EstadoPropiedad } from '../interfaces/interface';
 import { Observable, of, throwError } from 'rxjs';
 import { catchError, tap, map } from 'rxjs/operators';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http'
@@ -141,8 +141,8 @@ export class PropiedadesService implements OnInit {
         catchError(this.handleError<AdmPropiedadBase[]>('ERROR: Registro Propiedad')),
         // tap((propiedad: AdmPropiedadBase[]) => console.log(propiedad))
       )
-      
     }
+
     devolverDetallePropiedadesPendientesAdmin(id_usuario: number, id_propiedad: number, auth_token: string){
       const httpOptionsToken = { headers : new HttpHeaders({'Content-Type' : 'application/json', 'Authorization' : `Bearer ${auth_token}`} )}
       const url = 'http://localhost:9000/detalle_prop_adm/'
@@ -151,7 +151,8 @@ export class PropiedadesService implements OnInit {
         tap((detalle_propiedad: any) => console.log(detalle_propiedad)),
         catchError(this.handleError<any>('ERROR: Registro Propiedad'))
       )
-    } 
+    }
+
     devolverDetalletodasprop(id_usuario: number, auth_token: string){
       const httpOptionsToken = { headers : new HttpHeaders({'Content-Type' : 'application/json', 'Authorization' : `Bearer ${auth_token}`} )}
       const url = 'http://localhost:9000/adm_prop_base/'
@@ -160,5 +161,16 @@ export class PropiedadesService implements OnInit {
         tap((detalle_propiedad: any) => console.log(detalle_propiedad)),
         catchError(this.handleError<any>('ERROR: Registro Propiedad'))
       )
-    } 
+    }
+    // hazme un servicio con esta url detalle_prop_adm/ para actualizar el estado de la propiedad
+
+    cambiarEstadoPropiedad(prop: EstadoPropiedad, auth_token: string){
+      const httpOptionsToken = { headers : new HttpHeaders({'Content-Type' : 'application/json', 'Authorization' : `Bearer ${auth_token}`} )}
+      const url = 'http://localhost:9000/detalle_prop_adm/'
+      return this.http.put<EstadoPropiedad>(url, prop, httpOptionsToken)
+      .pipe(
+        tap((actualizacion: EstadoPropiedad) => console.log(actualizacion)),
+        catchError(this.handleError<EstadoPropiedad>('ERROR: Registro Propiedad'))
+      )
+    }
   }

@@ -93,3 +93,10 @@ export interface TodasPropiedades {
     nombre_region?:  string,
     nombre_usuario?: string,
 }
+
+export interface EstadoPropiedad {
+    id_usuario? : number,
+    id_propiedad? : number,
+    ultimo_estado : number,
+    observacion_denegacion? : string
+}

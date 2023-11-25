@@ -1,5 +1,8 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
     <ion-title>Panel de Control</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -37,10 +40,10 @@
                   <ion-button (click)="viewPropPendiente(item.id_propiedad)" size="small" fill="clear" shape="round">
                     <ion-icon name="eye-outline" color="primary" size="small"></ion-icon>
                   </ion-button>
-                  <ion-button (click)="viewPropPendiente(item.id_propiedad)"  size="small" fill="clear" shape="round">
+                  <ion-button (click)="validarPropiedad(item.id_propiedad)"  size="small" fill="clear" shape="round">
                     <ion-icon name="checkmark-circle-outline" color="success" size="small"></ion-icon>
                   </ion-button>
-                  <ion-button (click)="viewPropPendiente(item.id_propiedad)" size="small" fill="clear" shape="round">
+                  <ion-button (click)="denegarPropiedad(item.id_propiedad)" size="small" fill="clear" shape="round">
                     <ion-icon name="trash-outline" color="danger" size="small"></ion-icon>
                   </ion-button>
                 </td>

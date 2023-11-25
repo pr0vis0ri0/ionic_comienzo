@@ -19,7 +19,7 @@ export class SidebarComponent  implements OnInit {
     if (token) {
       const decoded = jwtDecode<JwtPayload>(token as string);
       const perfil = decoded.id_perfil as number;
-      this.userProfile = 1;
+      this.userProfile = perfil;
     }
   }
 
