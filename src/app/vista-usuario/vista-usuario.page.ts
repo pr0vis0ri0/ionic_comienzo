@@ -62,6 +62,7 @@ export class VistaUsuarioPage implements OnInit {
     ) { }
 
   ngOnInit() {
+    this.idPerfil() == 2 ? console.log('hi') : window.location.href = '/vsadmin';
     this.propiedadesPendientes()
     this.propiedadesValidadas()
     this.buscarRegiones()
@@ -85,6 +86,14 @@ export class VistaUsuarioPage implements OnInit {
     const decoded = jwtDecode<JwtPayload>(token as string);
     id_user = decoded.id_usuario as number;
     return id_user
+  }
+
+  idPerfil() : any {
+    const token = this.devolverToken()
+    let id_perfil : number | null;
+    const decoded = jwtDecode<JwtPayload>(token as string);
+    id_perfil = decoded.id_perfil as number;
+    return id_perfil;
   }
 
   buscarComunas() {

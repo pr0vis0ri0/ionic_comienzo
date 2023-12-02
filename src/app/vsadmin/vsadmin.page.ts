@@ -24,6 +24,7 @@ export class VsadminPage implements OnInit {
   indexActivo: number = 0;
    
   ngOnInit() {
+    this.idPerfil() == 1 ? console.log('hi') : window.location.href = '/vista-usuario';
     this.loadPropiedadesRevision();
     this.loadBasePropiedades();
   }
@@ -80,7 +81,16 @@ export class VsadminPage implements OnInit {
     return id_user;
   }
 
+  idPerfil() : any {
+    const token = this.devolverToken()
+    let id_perfil : number | null;
+    const decoded = jwtDecode<JwtPayload>(token as string);
+    id_perfil = decoded.id_perfil as number;
+    return id_perfil;
+  }
+
   async viewPropPendiente(id_propiedad: number) {
+    this.indexActivo = 0;
     let registro : any  = this.propiedades_pendientes.find((element)=>element.id_propiedad==id_propiedad);
     this.vs = registro;
     const loading = await this.loading.create({
@@ -93,6 +103,7 @@ export class VsadminPage implements OnInit {
   }
   
   async viewPropPendienteM(id_propiedad : number) {
+    this.indexActivo = 0;
     let registro : any  = this.todas_propiedades.find((element)=>element.id_propiedad==id_propiedad);
     this.vss = registro;
     const loading = await this.loading.create({

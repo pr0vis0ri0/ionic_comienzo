@@ -100,3 +100,9 @@ export interface EstadoPropiedad {
     ultimo_estado : number,
     observacion_denegacion? : string
 }
+
+export interface ArrendarComprar {
+    id_usuario ?: number,
+    id_propiedad ?: number,
+    ultimo_estado ?: number,
+}

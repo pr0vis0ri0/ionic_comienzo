@@ -1,5 +1,5 @@
 import { Injectable, OnInit } from '@angular/core';
-import { Propiedad, DetallePropiedad, RegistroPropiedad,AdmPropiedadBase, EstadoPropiedad } from '../interfaces/interface';
+import { Propiedad, DetallePropiedad, RegistroPropiedad,AdmPropiedadBase, EstadoPropiedad, ArrendarComprar } from '../interfaces/interface';
 import { Observable, of, throwError } from 'rxjs';
 import { catchError, tap, map } from 'rxjs/operators';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http'
@@ -171,6 +171,16 @@ export class PropiedadesService implements OnInit {
       .pipe(
         tap((actualizacion: EstadoPropiedad) => console.log(actualizacion)),
         catchError(this.handleError<EstadoPropiedad>('ERROR: Registro Propiedad'))
+      )
+    }
+
+    ArrendarComprarPropiedad(prop: ArrendarComprar, auth_token: string){
+      const httpOptionsToken = { headers : new HttpHeaders({'Content-Type' : 'application/json', 'Authorization' : `Bearer ${auth_token}`} )}
+      const url = 'http://localhost:9000/arrendar_comprar_propiedad/'
+      return this.http.put<ArrendarComprar>(url, prop, httpOptionsToken)
+      .pipe(
+        tap((actualizacion: ArrendarComprar) => console.log(actualizacion)),
+        catchError(this.handleError<ArrendarComprar>('ERROR: Registro Propiedad'))
       )
     }
   }
